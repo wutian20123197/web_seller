@@ -1,0 +1,71 @@
+/*!!cmd:lessbuild=false*/
+/*
+ * iconfont字体库
+ * 地址：http://www.iconfont.cn/users/project?pid=12277
+ */
+
+@font-face {
+  font-family: 'bpfont';
+  src: url('//at.alicdn.com/t/font_1458538457_371084.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/font_1458538457_371084.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/font_1458538457_371084.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/font_1458538457_371084.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/font_1458538457_371084.svg#bpfont') format('svg'); /* iOS 4.1- */
+
+}
+.bpfont {
+  font-family: "bpfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased; /* 1 */
+  -moz-osx-font-smoothing: grayscale; /* 2 */
+}
+
+body{
+  font-size: 12px;
+  color: @body-color;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clearfix {
+  zoom: 1; /*兼容ie6 激活ie6 layout 属性*/
+  &:after{
+    display: block;
+    content: "";
+    height: 0;
+    clear: both;
+  }
+}
+
+/*颜色start*/
+.orange{
+  color: @orange;
+}
+/*颜色end*/
+
+a {
+  color: @body-color;
+  &:hover{
+    color: @hover-link;
+  }
+}
+
+.ml5{
+  margin-left: 5px;
+}
+
+
+.mr5{
+  margin-right: 5px;
+}
+.mr10{
+  margin-right: 10px;
+}
