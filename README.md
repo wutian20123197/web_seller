@@ -8,3 +8,6 @@
       但是模板引擎切换的时候遇到了很多坑，因为handlebars不支持引用外部文件也就是之前ejs支持的<% include a.html %>不支持了 最后Google到了解决方案
       使用express-handlebars解决了
     * 对于静态文件的编译 采用的是less 使用express-less-middleware 可以将我们的less文件编译成css文件 并且是实时编译的
+* 第三方资源
+    * 项目中的icon 使用的是阿里巴巴集团提供的iconfont 地址：http://www.iconfont.cn/
+    * 组件使用的是brix组件库 由阿里妈妈提供技术支持

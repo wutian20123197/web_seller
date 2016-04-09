@@ -1,0 +1,38 @@
+/**
+ * dynamicfunc.less
+ * 动态效果库
+ * @version 20160405
+ */
+
+.ch-scale-time () {
+  transition: .3s;
+  .animation-timing-function(cubic-bezier(0.43, 0.42, 1, 1));
+}
+
+.ch-scale() {
+  transition: .3s;
+  transform: scale(1.1);
+}
+
+/*图片offer hover 放大示例*/
+.offer-img {
+  .ch-scale-time ();
+  &:hover {
+    .ch-scale();
+  }
+}
+
+.ch-flip-time() {
+  transition: .5s;
+}
+
+.ch-flipY() {
+  .rotateY(180);
+}
+
+.img-rotate {
+  .ch-flip-time();
+  &:hover {
+    .ch-flipY();
+  }
+}
