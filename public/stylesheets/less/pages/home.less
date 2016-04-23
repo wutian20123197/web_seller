@@ -1,15 +1,62 @@
 .sl-banner {
+  position: relative;
+  background-color: rgb(40, 254, 246);
+
   .content {
     width: 750px;
     height: 440px;
     overflow: hidden;
+    position: relative;
+    margin: 0 auto;
     .tab-page{
       display: none;
     }
+    img{
+      position: absolute;
+    }
+    .text{
+      .ch-fade-left();
+    }
+    .background {
+      .ch-fade-right();
+    }
   }
+
+  h4 {
+    height: 40px;
+    line-height: 40px;
+    margin-left: 20px;
+  }
+
+  .category-nav {
+    position: absolute;
+    width: 240px;
+    height: 510px;
+    color: #fff;
+    left: 60px;
+    top: -40px;
+    background-color: @category-nav-color;
+
+    .category-nav-dl {
+      margin: 20px 0 0 20px;
+
+      .category-nav-item {
+        float: left;
+        width: 66px;
+        padding: 3px 0;
+        font-size: 12px;
+
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
+
   .footer {
     height: 30px;
-    width: 747px;
+    width: 750px;
+    margin: 0 auto;
     background-color: #fff;
     .tab-nav{
       float: left;
@@ -34,6 +81,7 @@
     }
     .nav-btn {
       float: right;
+      font-size: 0; /*消除inline-block之前的间隙*/
       a {
         height: 30px;
         width: 60px;
@@ -52,3 +100,45 @@
     }
   }
 }
+
+/*热门推荐*/
+.sl-hot-recommend {
+  background-color: @floorbg;
+
+  .sl-hot-recommend-floor-head{
+    height: 90px;
+    text-align: center;
+    color: @sub-title;
+  }
+
+  .sl-hot-recommend-wrapper {
+
+  }
+
+  .sl-hot-recommend-body {
+    width: 1190px;
+    margin: 0 auto;
+    border: 1px solid @border;
+    background-color: #fff;
+  }
+
+  h2 {
+    line-height: 90px;
+  }
+
+}
+
+
+.sl-bg-blue {
+  background-color: rgb(40, 254, 246);
+}
+.sl-bg-red {
+  background-color: rgb(244, 65, 0);
+}
+.sl-bg-gray {
+  background-color: rgb(188, 201, 212);
+}
+.sl-bg-black {
+  background-color: rgb(14, 10, 9);
+}
+

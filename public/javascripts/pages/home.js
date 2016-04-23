@@ -8,7 +8,8 @@ require(['../lib/config'],function(){
             ImgBoxItem: "#img-box li",
             TabNavLi: ".tab-nav li",
             Pre: ".pre",
-            Next: ".next"
+            Next: ".next",
+            SlBanner: "banner-wrapper"
         };
         var index = 0;
         var $imgBox = $(pageConfig.ImgBox);
@@ -16,6 +17,7 @@ require(['../lib/config'],function(){
         var $tabNavLi = $(pageConfig.TabNavLi);
         var $next = $(pageConfig.Next);
         var $pre = $(pageConfig.Pre);
+        var slBanner = document.getElementById(pageConfig.SlBanner);
         var timmer;
         var bannerLength = 0; //轮播图图片的数目
 
@@ -57,6 +59,7 @@ require(['../lib/config'],function(){
             clearInterval(timmer);
             $imgBoxItem.eq(index).fadeIn(300).siblings().fadeOut(300);
             $tabNavLi.eq(index).addClass('active').siblings().removeClass('active');
+            changeBackgroundColor(index);
             timmer = setInterval(controlImg,3000);
         }
 
@@ -65,6 +68,7 @@ require(['../lib/config'],function(){
             index < bannerLength || (index = 0);
             $imgBoxItem.eq(index).fadeIn(250).siblings().fadeOut(250);
             movePanelTab(index);
+            changeBackgroundColor(index);
         }
 
         function movePanelTab(index) {
@@ -77,12 +81,36 @@ require(['../lib/config'],function(){
                 $(this).addClass('active').siblings().removeClass('active');
                 index = $(this).index();
                 $imgBoxItem.eq(index).fadeIn(300).siblings().fadeOut(300);
+                changeBackgroundColor(index);
             },function(){
                 timmer = setInterval(controlImg,3000);
             });
         }
 
-        initEvent();
+        /**
+         * 改变背景颜色
+         */
+        function changeBackgroundColor(index) {
+            var className = "sl-bg-blue";
+            switch (index){
+                case 0:
+                    className = "sl-bg-blue";
+                    break;
+                case 1:
+                    className = "sl-bg-red";
+                    break;
+                case 2:
+                    className = "sl-bg-gray";
+                    break;
+                case 3:
+                    className = "sl-bg-black";
+                    break;
+                default :
+                    break;
+            }
+            slBanner.className = className;
+        }
 
+        initEvent();
     });
 });
