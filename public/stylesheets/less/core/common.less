@@ -4,3 +4,130 @@
  * @version 20160405
  */
 
+/*颜色start*/
+.orange{
+  color: @orange;
+}
+/*颜色end*/
+
+a{
+  color: #222;
+}
+a:hover,a:active,a:focus{
+  text-decoration: none;
+  color: @hover-link;
+}
+
+
+/*公用组件样式定义*/
+.search-keywords {
+  width: 308px;
+  height: 20px;
+  display: inline-block;
+  border: 3px solid #d9d9d9;
+  vertical-align: top;
+  padding: 5px 4px;
+  border-right: none;
+  input {
+    width: 308px;
+    position: relative;
+    top: 4px;
+    vertical-align: middle;
+    border: none;
+  }
+}
+
+.btn{
+  height: 32px;
+  border: 2px solid @orange;
+  line-height: 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  padding: 0 12px;
+  &.a{
+    background-color: red;
+    &:link{
+      color: @orange;
+    }
+  }
+}
+
+.btn-orange{
+  color: #fff;
+  background-color: @orange;
+  &:hover{
+    color: #fff;
+  }
+}
+
+/*offer组件样式定义*/
+.sl-offer-list {
+  float: left;
+  width: 238px;
+  height: 310px;
+  background-color: #fff;
+
+  .sl-offer-list-imgbox {
+    margin: 18px;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+
+    img {
+      width: 200px;
+      height: 200px;
+      .ch-scale-time();
+
+      &:hover {
+        .ch-scale();
+      }
+    }
+  }
+
+  .sl-offer-text {
+    margin: 18px;
+    height: 23px;
+    text-align: left;
+
+    .sl-offer-text-price {
+      float: left;
+      line-height: 23px;
+    }
+
+    .sl-offer-text-area {
+      float: right;
+      line-height: 23px;
+    }
+
+  }
+}
+
+/*楼层类目布局 左边banner 右侧offer*/
+.sl-floor-category {
+  width: 1190px;
+  margin: 50px auto 0 auto;
+
+  .sl-offer-list {
+    width: 237px;
+  }
+
+  .left {
+    float: left;
+    display: inline-block;
+    width: 240px;
+    height: 620px;
+    overflow: hidden;
+  }
+
+  .right {
+    float: left;
+    display: inline-block;
+    width: 948px;
+    height: 620px;
+    overflow: hidden;
+    border: 1px solid @border;
+    border-left: none;
+  }
+}
+

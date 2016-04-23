@@ -7,7 +7,9 @@ var path = require('path');
 var handlebars = require('express-handlebars');
 var lessMiddleware = require("less-middleware");
 
-
+app.get('/detail', function(req, res){
+    res.render('detail');
+});
 app.get('/', function (req, res) {
     var data =
     {
@@ -109,7 +111,7 @@ app.get('/', function (req, res) {
         ]
     };
 
-    res.render('test', data);
+    res.render('index', data);
 });
 
 
