@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <link href="http://style.c.aliimg.com/fdevlib/css/lofty/port/lofty.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="stylesheets/less/seller.css"/>
+    <!--<script src="javascripts/lib/require.js"></script>-->
+    <script src="http://g.tbcdn.cn/thx/brix-release/0.1.5/require-config-css-debug.js
+"></script>
+    <title>test</title>
+</head>
+<body>
+<div class="sl-wrapper">
+    <label>
+        <input type="checkbox" class="bx-anim-checkbox">
+        未选中
+    </label>
+    <label>
+        <input type="checkbox" class="bx-anim-checkbox" checked="">
+        已选中
+    </label>
+    <label class="disabled">
+        <input type="checkbox" class="bx-anim-checkbox" disabled="">
+        禁用/未选中
+    </label>
+    <label class="disabled">
+        <input type="checkbox" class="bx-anim-checkbox" checked="" disabled="">
+        禁用/已选中
+    </label>
+    <input bx-name="components/datepickerwrapper" type="text" class="w100 mr40">
+    <div bx-name="components/datepickerwrapper" data-dates="['2015-1-1', '2015-1-2']" data-shortcuts="false" class="datepickerwrapper-trigger">
+        <span data-index="0">2015-1-1</span> 至 <span data-index="1">2015-1-2</span>
+        <i class="brixfont pull-right ml5 down"></i>
+        <i class="brixfont pull-right ml5 up"></i>
+    </div>
+    <div style="margin-top: 100px;"></div>
+</div>
+</body>
+</html>
