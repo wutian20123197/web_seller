@@ -4,6 +4,7 @@
 requirejs.config({
     baseUrl: "javascripts/lib",
     paths: {
-        "jquery": "jquery.min"
+        "jquery": "jquery.min",
+        "tabs" : "../components/tabs"
     }
 });

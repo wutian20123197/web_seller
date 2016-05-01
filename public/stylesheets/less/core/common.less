@@ -137,3 +137,30 @@ a:hover,a:active,a:focus{
   }
 }
 
+/*tab组件*/
+.tab {
+
+  .tab-list {
+    border-bottom: 1px solid @orange;
+  }
+  .tab-item {
+    float: left;
+    font-size: 14px;
+    width: 65px;
+    text-align: center;
+    margin-right: 10px;
+  }
+  .tab-current {
+    color: @orange;
+    border-bottom: 2px solid @orange;
+  }
+  .tab-content {
+    .tab-content-item {
+      display: none;
+    }
+    .tab-content-current {
+      display: block;
+    }
+  }
+}
+
