@@ -101,7 +101,7 @@
   }
 
   .main-info {
-
+    margin-top: 20px;
     .left {
       float: left;
       width: 800px;
@@ -109,14 +109,59 @@
 
     .right {
       float: left;
-      width: 200px;
+      width: 150px;
+      margin-left: 15px;
       background-color: @floorbg;
 
+      h4 {
+        font-size: 14px;
+        padding: 10px 0;
+        text-align: center;
+      }
       .product-img {
         width: 110px;
         height: 110px;
+        margin: 0 auto 30px auto;
+
+        img {
+          width: 110px;
+          height: 110px;
+          margin: 0 auto;
+        }
+
+        .price {
+          text-align: center;
+          padding-bottom: 5px;
+        }
       }
     }
   }
+
+  /*留言模块*/
+  .sl-detail-record-words {
+
+    .sl-detail-do-records {
+      height: 110px;
+      float: left;
+      background-color: @floorbg;
+    }
+    .sl-detail-do-records-wrapper {
+      padding: 10px;
+    }
+    .sl-detail-user {
+      float: left;
+      margin-right: 10px;
+    }
+    .sl-detail-add {
+      float: left;
+      width: 700px;
+
+      textarea {
+        width: 100%;
+        height: 60px;
+      }
+    }
+  }
+  /*\留言模块*/
 
 }

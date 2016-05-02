@@ -2,14 +2,20 @@
  * Created by xiaotian on 16/4/9.
  */
 require(['../lib/config'],function(){
-    require(['jquery'],function($){
+    require([
+        'jquery',
+        'dialog',
+        'template',
+        '../pages/publish_offer'
+    ],function($, Dialog, Template){
         var pageConfig = {
             ImgBox: "#img-box",
             ImgBoxItem: "#img-box li",
             TabNavLi: ".tab-nav li",
             Pre: ".pre",
             Next: ".next",
-            SlBanner: "banner-wrapper"
+            SlBanner: "banner-wrapper",
+            publishBtn: ".btn-publish"
         };
         var index = 0;
         var $imgBox = $(pageConfig.ImgBox);
@@ -18,7 +24,7 @@ require(['../lib/config'],function(){
         var $next = $(pageConfig.Next);
         var $pre = $(pageConfig.Pre);
         var slBanner = document.getElementById(pageConfig.SlBanner);
-        var timmer;
+        var timmer, $publishBtn = $(pageConfig.publishBtn);
         var bannerLength = 0; //轮播图图片的数目
 
         function initEvent(){
@@ -27,6 +33,7 @@ require(['../lib/config'],function(){
             preBanner();
             nextBanner();
             panelTabHover();
+            showPublishDialog();
         }
 
         var setBannerTime = function(){
@@ -110,6 +117,21 @@ require(['../lib/config'],function(){
             }
             slBanner.className = className;
         }
+
+        function showPublishDialog() {
+            $publishBtn.click(function(){
+                var data = {name:"wutian"};
+
+                var html = Template('publish_offer', data);
+                Dialog.defaults.transition = "zoom";
+                Dialog.confirm()
+                    .set({'labels':{ok:'发布', cancel:'取消'}, 'title':"text"})
+                    .setContent(html)
+                    .show();
+            });
+        }
+
+
 
         initEvent();
     });

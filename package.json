@@ -13,6 +13,7 @@
     "express-handlebars": "^3.0.0",
     "express-less-middleware": "^1.4.4",
     "handlebars": "^4.0.5",
-    "less-middleware": "^2.1.0"
+    "less-middleware": "^2.1.0",
+    "alertifyjs": "^1.6.1"
   }
 }

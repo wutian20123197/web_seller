@@ -2,7 +2,9 @@
  * 选项卡组件
  * Created by wutian on 2016/5/1.
  */
-define("tabs", function(){
+define("tabs",[
+    'jquery'
+], function($){
     var config = {
         id: "#tabs-wrapper", //实例化组件的id,
         tabs: ".tab-item",
