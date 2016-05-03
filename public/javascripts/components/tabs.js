@@ -15,7 +15,8 @@ define("tabs",[
 
     var $root, $tabs, $tabContents;
     var exports = {
-        init: function(){
+        init: function(innerConfig){
+            $.extend(config, innerConfig);
             $root = $(config.id);
             $tabs = $root.find(config.tabs);
             $tabContents = $root.find(config.tabContentItem);
@@ -47,9 +48,10 @@ define("tabs",[
         },
         bindEvents: function(){
             var handlers = this.handlers;
+            console.log($tabs);
             $tabs.bind('click', handlers.changeTabs)
         }
     };
 
-    exports.init();
+    return exports;
 });

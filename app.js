@@ -4,8 +4,17 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var mongoose = require('mongoose');
 var handlebars = require('express-handlebars');
 var lessMiddleware = require("less-middleware");
+
+var UserModel = require("./controller/userController");
+var UserModelInfo = UserModel.modelInfo;
+
+//连接数据库
+mongoose.connect('mongodb://127.0.0.1:27017/seller');
+
+UserModelInfo.onRegister();
 
 app.get('/detail', function(req, res){
     res.render('detail');

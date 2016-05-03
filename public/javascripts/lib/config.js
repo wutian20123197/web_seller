@@ -7,6 +7,12 @@ requirejs.config({
         "jquery": "jquery.min",
         "tabs" : "../components/tabs", //选项卡组件
         "dialog": "../components/alertify", //提示框组件
-        'template': '../components/template' //art模板引擎组件
+        'template': '../components/template', //art模板引擎组件
+        'validator': "../components/validator/zh-CN"
+    },
+    map: {
+        '*': {
+            'css': '../components'
+        }
     }
 });

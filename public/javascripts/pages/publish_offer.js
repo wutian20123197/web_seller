@@ -3,7 +3,7 @@
  */
 define('../pages/publish_offer',[
         'jquery',
-        'dialog',
-        'template'
-    ], function ($, Dialog, Template) {
+        'validator'
+    ], function ($, Valid) {
+
     });

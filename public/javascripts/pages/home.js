@@ -6,8 +6,9 @@ require(['../lib/config'],function(){
         'jquery',
         'dialog',
         'template',
-        '../pages/publish_offer'
-    ],function($, Dialog, Template){
+        '../pages/login',
+        '../pages/publish_offer',
+    ],function($, Dialog, Template, Login){
         var pageConfig = {
             ImgBox: "#img-box",
             ImgBoxItem: "#img-box li",
@@ -34,6 +35,7 @@ require(['../lib/config'],function(){
             nextBanner();
             panelTabHover();
             showPublishDialog();
+            Login.init();
         }
 
         var setBannerTime = function(){
@@ -125,13 +127,18 @@ require(['../lib/config'],function(){
                 var html = Template('publish_offer', data);
                 Dialog.defaults.transition = "zoom";
                 Dialog.confirm()
-                    .set({'labels':{ok:'发布', cancel:'取消'}, 'title':"text"})
+                    .set({'labels':{ok:'发布', cancel:'取消'}, 'title':"发布闲置"})
                     .setContent(html)
                     .show();
             });
         }
 
+        /**
+         * 显示登录框
+         */
+        function showLoginDialog () {
 
+        }
 
         initEvent();
     });

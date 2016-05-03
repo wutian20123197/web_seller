@@ -14,6 +14,9 @@
     "express-less-middleware": "^1.4.4",
     "handlebars": "^4.0.5",
     "less-middleware": "^2.1.0",
-    "alertifyjs": "^1.6.1"
+    "alertifyjs": "^1.6.1",
+    "nice-validator": "^0.10.9",
+    "webuploader": "^0.1.8",
+    "mongoose": "^4.4.14"
   }
 }

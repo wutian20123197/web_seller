@@ -1,7 +1,7 @@
 <div class="header-bars-container clear">
     <div class="left">
-        <span class="orange mr10">亲，请登录</span>
-        <a href="" class="mr10">免费注册</a>
+        <span class="orange mr10"><a id="show-login-dialog" href="javascript:;">亲，请登录</a></span>
+        <a href="javascript:;" id="show-register-dialog" class="mr10">免费注册</a>
         <a href="">消息</a>
     </div>
     <div class="right">
@@ -13,3 +13,5 @@
         </ul>
     </div>
 </div>
+<!--登录框-->
+{{> login}}

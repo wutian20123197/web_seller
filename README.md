@@ -11,3 +11,7 @@
 * 第三方资源
     * 项目中的icon 使用的是阿里巴巴集团提供的iconfont 地址：http://www.iconfont.cn/
     * 组件使用的是brix组件库 由阿里妈妈提供技术支持
+* 数据库启动
+    * 1、进入mongodb的安装目录 D:\>cd MongoDB\bin
+    * 2、指定数据存储位置 D:\MongoDB\bin>mongod --dbpath D:\Mongodb\data
+    * 3、采用可视化管理工具Robomongo 管理数据库
