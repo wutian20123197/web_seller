@@ -11,6 +11,7 @@ var exp = {
             console.log(info.name);
         });
     },
+
     /**
      * 用户注册
      */

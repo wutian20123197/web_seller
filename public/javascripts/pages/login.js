@@ -6,14 +6,21 @@ define('../pages/login', [
     'jquery',
     'dialog',
     'template',
-    'tabs'
-], function ($, Dialog, Template, Tabs) {
+    'tabs',
+    'model'
+], function ($, Dialog, Template, Tabs, Model) {
     var config = {
         showLoginDialogBtn: "#show-login-dialog",
-        tplId: "login"
+        onRegisterBtn: "#register-btn",
+        tplId: "login",
+       registerAccount: '#register-account',
+        registerPassword: "#register-password",
+        registerrePasswprd: "#register-repassword",
+        registerEmail: "#register-email"
+
     };
 
-    var $showLoginDialogBtn;
+    var $showLoginDialogBtn, $registerBtn;
 
     var exports = {
         init: function () {
@@ -38,7 +45,23 @@ define('../pages/login', [
                     .setContent(html)
                     .show();
                 $(".ajs-footer").hide();
+                exports.handlers.initDialogParams();
+            },
+
+            /**
+             * 初始化弹窗需要的注册事件
+             */
+            initDialogParams : function() {
                 Tabs.init({id: "#login-tabs-wrapper"});
+                $registerBtn = $(config.onRegisterBtn);
+                $registerBtn.bind('click',exports.handlers.doRegister);
+            },
+
+            doRegister : function() {
+               var account = $(config.registerAccount).val();
+              Model.getRequestByParams('do_register', {name: "wutian"}, function(data){
+                  alert(data);
+              });
             }
         },
         bindEvents: function () {

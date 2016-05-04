@@ -19,6 +19,14 @@ UserModelInfo.onRegister();
 app.get('/detail', function(req, res){
     res.render('detail');
 });
+
+app.get('/register', function(req, res){
+    var ajaxTest={
+        tips:"you are not alone"
+    };
+    res.send(ajaxTest);
+});
+
 app.get('/', function (req, res) {
     var data =
     {
