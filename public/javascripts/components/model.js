@@ -2,12 +2,20 @@
  * 封装本地ajax请求
  * Created by wutian on 2016/5/4.
  */
-define('model', function(){
+define('model',[
+    'dialog'
+],function(Dialog){
     //ajax请求同一参数配置列表
     var urlConfig = [
         {
             name: "do_register",
-            url: "/register"
+            url: "/register",
+            type: "post"
+        },
+        {
+            name: "do_login",
+            url: "/login",
+            type: 'post'
         }
     ];
 
@@ -36,7 +44,12 @@ define('model', function(){
                 dataType: "json",
                 data: params,
                 success: function(data) {
-                    fn(data);
+                    if(data.code === 200){
+                        fn(data);
+                    }else {
+                        Dialog.notify(data.message, 'error', 3);
+                        return false;
+                    }
                 },
                 error: function() {
                     alert("系统错误");

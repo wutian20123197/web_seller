@@ -10,21 +10,31 @@ define('../pages/login', [
     'model'
 ], function ($, Dialog, Template, Tabs, Model) {
     var config = {
+        //注册
         showLoginDialogBtn: "#show-login-dialog",
         onRegisterBtn: "#register-btn",
         tplId: "login",
-       registerAccount: '#register-account',
+        userRegisterForm: "#user-register-form",
+        registerAccount: '#register-account',
         registerPassword: "#register-password",
         registerrePasswprd: "#register-repassword",
-        registerEmail: "#register-email"
+        registerEmail: "#register-email",
+
+        //登录
+        showRegisterDialogBtn: "#show-register-dialog",
+        loginBtn: "#login-btn",
+        loginAccount: "#login-account",
+        loginPassword: "#login-password"
 
     };
 
-    var $showLoginDialogBtn, $registerBtn;
+    var $showLoginDialogBtn, $registerBtn, $userRegisterForm,
+        $showRegisterDialogBtn, $loginBtn;
 
     var exports = {
         init: function () {
             $showLoginDialogBtn = $(config.showLoginDialogBtn);
+            $showRegisterDialogBtn = $(config.showRegisterDialogBtn);
             this.bindEvents();
         },
         handlers: {
@@ -37,36 +47,87 @@ define('../pages/login', [
                 return tpl || "";
             },
 
-            showLoginDialog: function () {
+            /**
+             * 显示登录弹框
+             * @param type 0 登录 1注册 2找回密码
+             */
+            showDialog: function (e) {
                 var html = exports.handlers.getTpl();
                 Dialog.defaults.transition = "zoom";
                 Dialog.confirm()
-                    .set({'labels': {ok: '发布', cancel: '取消'}, 'title': "二手物品交易网站"})
+                    .set({ 'title': "二手物品交易网站"})
                     .setContent(html)
                     .show();
                 $(".ajs-footer").hide();
                 exports.handlers.initDialogParams();
+                Tabs.selectTabs(e.data.type);
             },
 
             /**
              * 初始化弹窗需要的注册事件
              */
-            initDialogParams : function() {
+            initDialogParams: function () {
                 Tabs.init({id: "#login-tabs-wrapper"});
                 $registerBtn = $(config.onRegisterBtn);
-                $registerBtn.bind('click',exports.handlers.doRegister);
+                $loginBtn = $(config.loginBtn);
+                $userRegisterForm = $(config.userRegisterForm);
+
+                $loginBtn.bind('click', exports.handlers.doLogin);
+                $registerBtn.bind('click', exports.handlers.doRegister);
             },
 
-            doRegister : function() {
-               var account = $(config.registerAccount).val();
-              Model.getRequestByParams('do_register', {name: "wutian"}, function(data){
-                  alert(data);
-              });
+            /**
+             * 用户注册
+             * @returns {boolean}
+             */
+            doRegister: function () {
+                var me = exports.handlers;
+               var flag = me.chargeRegisterForm();
+                if (!flag) {
+                    return false;
+                }
+                var account = $(config.registerAccount).val();
+                var password = $(config.registerPassword).val();
+                var email = $(config.registerEmail).val();
+
+                var params = {
+                    "account": account,
+                    "password": password,
+                    "email": email
+                };
+                Model.getRequestByParams('do_register', params, function (data) {
+                });
+            },
+
+            /**
+             * 用户登录
+             */
+            doLogin: function() {
+                var params = {};
+               params.account = $(config.loginAccount).val();
+               params.password = $(config.loginPassword).val();
+                Model.getRequestByParams('do_login', params, function (data) {
+                });
+            },
+
+            /**
+             * 校验注册表单格式
+             */
+            chargeRegisterForm: function () {
+                var isValid = $userRegisterForm.isValid();
+                var password = $(config.registerPassword).val();
+                var rePassword = $(config.registerrePasswprd).val();
+                if (password !== rePassword) {
+                    Dialog.notify('前后两次输入密码不相同，请重新输入!', 'error', 3);
+                    return false;
+                }
+                return true;
             }
         },
         bindEvents: function () {
             var handlers = this.handlers;
-            $showLoginDialogBtn.bind('click', handlers.showLoginDialog);
+            $showLoginDialogBtn.bind('click',{type: 0}, handlers.showDialog);
+            $showRegisterDialogBtn.bind('click',{type: 1}, handlers.showDialog);
         }
     };
     return exports;

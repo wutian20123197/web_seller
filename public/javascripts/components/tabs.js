@@ -8,6 +8,7 @@ define("tabs",[
     var config = {
         id: "#tabs-wrapper", //实例化组件的id,
         tabs: ".tab-item",
+        start: 0, //tab 默认选中第几个
         tabContentItem: ".tab-content-item",
         tabCurrent: "tab-current",
         tabContentCurrent: "tab-content-current"
@@ -22,6 +23,11 @@ define("tabs",[
             $tabContents = $root.find(config.tabContentItem);
             this.bindEvents();
         },
+
+        selectTabs: function(index) {
+            this.handlers.selectDefaultTabs(index);
+        },
+
         handlers: {
             /**
              * 改变tab选项样式
@@ -44,11 +50,21 @@ define("tabs",[
                     .addClass(config.tabContentCurrent)
                     .siblings()
                     .removeClass(config.tabContentCurrent);
+            },
+
+            /**
+             * 选中默认选项卡
+             */
+            selectDefaultTabs: function(index){
+                $tabs.eq(index)
+                    .addClass(config.tabCurrent)
+                    .siblings()
+                    .removeClass(config.tabCurrent);
+                exports.handlers.showContent(index);
             }
         },
         bindEvents: function(){
             var handlers = this.handlers;
-            console.log($tabs);
             $tabs.bind('click', handlers.changeTabs)
         }
     };

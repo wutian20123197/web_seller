@@ -4,9 +4,11 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var http = require('http');
 var mongoose = require('mongoose');
 var handlebars = require('express-handlebars');
 var lessMiddleware = require("less-middleware");
+var bodyParser     =  require("body-parser");
 
 var UserModel = require("./controller/userController");
 var UserModelInfo = UserModel.modelInfo;
@@ -14,18 +16,17 @@ var UserModelInfo = UserModel.modelInfo;
 //连接数据库
 mongoose.connect('mongodb://127.0.0.1:27017/seller');
 
-UserModelInfo.onRegister();
-
 app.get('/detail', function(req, res){
     res.render('detail');
 });
 
-app.get('/register', function(req, res){
-    var ajaxTest={
-        tips:"you are not alone"
-    };
-    res.send(ajaxTest);
-});
+app.use( bodyParser.urlencoded({ extended: true })); // json格式解析
+
+//用户注册
+app.post('/register', UserModelInfo.onRegister);
+
+//用户登录
+app.post('/login', UserModelInfo.onLogin);
 
 app.get('/', function (req, res) {
     var data =
