@@ -10,8 +10,13 @@ var handlebars = require('express-handlebars');
 var lessMiddleware = require("less-middleware");
 var bodyParser     =  require("body-parser");
 
-var UserModel = require("./controller/userController");
-var UserModelInfo = UserModel.modelInfo;
+var UserController = require("./controller/userController").modelInfo;
+var CategoryController = require("./controller/categoryController").modelInfo;
+var UploadController = require("./controller/uploadController").modelInfo;
+
+
+var fs = require('fs');
+
 
 //连接数据库
 mongoose.connect('mongodb://127.0.0.1:27017/seller');
@@ -23,113 +28,30 @@ app.get('/detail', function(req, res){
 app.use( bodyParser.urlencoded({ extended: true })); // json格式解析
 
 //用户注册
-app.post('/register', UserModelInfo.onRegister);
+app.post('/register', UserController.onRegister);
 
 //用户登录
-app.post('/login', UserModelInfo.onLogin);
+app.post('/login', UserController.onLogin);
 
-app.get('/', function (req, res) {
-    var data =
-    {
-        categoryList: [
-            {
-                categoryName: "跳蚤市场",
-                itemList: [
-                    {
-                        name: "电脑",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "手机",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "电器",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "健身器",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "书籍",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "化妆品",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "箱包",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "鞋帽",
-                        link: "http://www.1688.com"
-                    },
+//获取首页左侧类目信息
+app.get('/', CategoryController.getCategoryList);
 
-                ]
-            },
-            {
-                categoryName: "代步工具",
-                itemList: [
-                    {
-                        name: "摩托车",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "电动车",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "自行车",
-                        link: "http://www.1688.com"
-                    },
-                ]
-            },
-            {
-                categoryName: "住房信息",
-                itemList: [
-                    {
-                        name: "转租",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "求租",
-                        link: "http://www.1688.com"
-                    }
-                ]
-            },
-            {
-                categoryName: "兼职招聘",
-                itemList: [
-                    {
-                        name: "家教",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "促销",
-                        link: "http://www.1688.com"
-                    },
-                    {
-                        name: "网页设计"
-                    }
-                ]
-            },
-            {
-                categoryName: "物品交换",
-                itemList: [
-                    {
-                        name: "物品交换",
-                        link: "http://www.1688.com"
-                    }
-                ]
-            },
+//获取主类目信息
+app.post("/getMainCategoryList",  CategoryController.getMainCategoryList);
 
-        ]
-    };
+//获取子类目信息
+app.post("/getSubCategoryList", CategoryController.getSubCategoryList);
 
-    res.render('index', data);
+//图片上传
+app.post("/uploadPicture", UploadController.upload);
+
+app.get("/public/upload/:filename",function(req, res){
+    var fileName = req.params.filename;
+    fs.readFile(__dirname+"/public/upload/"+fileName,'binary',function(err, file) {
+        res.writeHead(200, {'Content-Type': 'image/jpg'});
+        res.write(file, 'binary');
+        res.end();
+    });
 });
 
 
@@ -146,9 +68,6 @@ app.set('view engine', 'hbs');
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 
 app.use(express.static(path.join(__dirname, 'public')));
-
-//app.use(express.static(__dirname + '/public'));
-
 
 app.listen(3000, function () {
     console.log("sever start on port 3000!");

@@ -3,28 +3,18 @@
 
 <script id="publish_offer" type="text/html">
     <div class="sl-publish">
-        <form id="demo_13" action="results.php" method="post" autocomplete="off"
-              data-validator-option="{theme:'yellow_right_effect',stopOnError:true}">
+        <form id="demo_13" action="" autocomplete="off" data-validator-option="{theme:'yellow_right_effect',stopOnError:true}">
             <fieldset>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">所属分类</span>
-                    <select name="" id="" class="sl-select ">
-                        <option value="">12</option>
-                        <option value="">3</option>
-                        <option value="">3</option>
-                    </select>
-                    <select name="" id="" class="sl-select">
-                        <option value="">12</option>
-                        <option value="">3</option>
-                        <option value="">3</option>
-                    </select>
+                    <select name="" id="main-category" class="sl-select "></select>
+                    <select name="" id="sub-category" class="sl-select"></select>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">所属区域</span>
-                    <select name="" id="" class="sl-select">
-                        <option value="">12</option>
-                        <option value="">3</option>
-                        <option value="">3</option>
+                    <select name="" id="offer-area" class="sl-select">
+                        <option value="西南科技大学（本部）">西南科技大学（本部）</option>
+                        <option value="西南科技大学（西山校区）">西南科技大学（西山校区）</option>
                     </select>
                 </div>
                 <div class="sl-publish-item">
@@ -60,32 +50,15 @@
                     <input name="tel" type="text" class="sl-input"  data-rule="联系电话:required; mobile"
                            data-rule-mobile="[/^1[3458]\d{9}$/, '请检查手机号格式']" placeholder="请输入手机号码"/>
                 </div>
-                <div class="sl-publish-item">
-                    <div id="wrapper">
-                        <div id="container">
-                            <!--头部，相册选择和格式选择-->
-
-                            <div id="uploader">
-                                <div class="queueList">
-                                    <div id="dndArea" class="placeholder">
-                                        <div id="filePicker"></div>
-                                        <p>或将照片拖到这里，单次最多可选300张</p>
-                                    </div>
-                                </div>
-                                <div class="statusBar" style="display:none;">
-                                    <div class="progress">
-                                        <span class="text">0%</span>
-                                        <span class="percentage"></span>
-                                    </div><div class="info"></div>
-                                    <div class="btns">
-                                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </fieldset>
         </form>
+        <!--图片上传-->
+        <form id= "uploadForm">
+            <input type="file" name="img"/>
+            <a href="javascript:;" id="upload-btn">上传</a>
+            <div id="img-wrapper">
+            </div>
+        </form>
+        <!--\图片上传-->
     </div>
 </script>

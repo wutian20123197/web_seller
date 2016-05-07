@@ -16,6 +16,16 @@ define('model',[
             name: "do_login",
             url: "/login",
             type: 'post'
+        },
+        {
+            name: "get_main_category_list",
+            url: '/getMainCategoryList',
+            type: "post"
+        },
+        {
+            name: "get_sub_category_list",
+            url: '/getSubCategoryList',
+            type: "post"
         }
     ];
 
@@ -27,11 +37,12 @@ define('model',[
          * @param fn 请求成功后的回调函数
          */
         getRequestByParams: function(name, params, fn){
-            var url,isPost = false;
+            var url,isPost = false, type, dataType;
             $.each(urlConfig, function(i, v){
                if(v.name === name){
                    url = v.url;
                    type = v.type || "get";
+                   dataType = v.dataType || "json";
                }
             });
 

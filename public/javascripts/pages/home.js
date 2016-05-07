@@ -8,7 +8,7 @@ require(['../lib/config'],function(){
         'template',
         '../pages/login',
         '../pages/publish_offer',
-    ],function($, Dialog, Template, Login){
+    ],function($, Dialog, Template, Login, Publish){
         var pageConfig = {
             ImgBox: "#img-box",
             ImgBoxItem: "#img-box li",
@@ -130,6 +130,7 @@ require(['../lib/config'],function(){
                     .set({'labels':{ok:'发布', cancel:'取消'}, 'title':"发布闲置"})
                     .setContent(html)
                     .show();
+                Publish.init();
             });
         }
 
