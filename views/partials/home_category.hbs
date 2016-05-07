@@ -1,23 +1,15 @@
+{{#each categoryList}}
 <div class="sl-floor-category clear">
     <div class="left">
         <div class="ch-layout-floor-normal-left-style1">
             <div class="ch-layout-floor-normal-left-style1-head">
-                <h2> 1F 面膜推荐</h2>
-
-                <!--类目头部列表-->
-                <ul class="ch-layout-floor-normal-left-style1-list-top clear">
-                    {{#each topArr}}
-                        <li class="list-item">
-                            <a href="{{link}}" target="_blank">{{text}}</a>
-                        </li>
-                    {{/each}}
-                </ul>
+                <h2> {{@index}}F {{categoryName}}</h2>
 
                 <!--类目底部列表-->
                 <ul class="ch-layout-floor-normal-left-style1-list-bottom clear">
-                    {{#each bottomArr}}
+                    {{#each itemList}}
                         <li class="list-item">
-                            <a href="{{link}}" target="_blank">{{text}}</a>
+                            <a href="{{link}}" target="_blank">{{name}}</a>
                         </li>
                     {{/each}}
                 </ul>
@@ -39,168 +31,26 @@
     </div>
     <div class="right">
         <ul class="clear">
+            {{#each offerList}}
             <li class="sl-offer-list">
                 <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
+                    <img src="{{main_img}}" alt=""/>
                 </div>
                 <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
+                    <h4>{{offer_title}}</h4>
                     <div class="mt10 clear">
                         <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
+                            <span class="f14">￥</span><span class="f24">{{offer_price}}</span>
                         </div>
                         <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
+                            <span><i class="iconfont">&#xe60c;</i>{{offer_area}}</span>
                         </div>
                     </div>
                 </div>
             </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="sl-offer-list">
-                <div class="sl-offer-list-imgbox">
-                    <img src="https://cbu01.alicdn.com/img/ibank/2016/481/385/2867583184_1343210851.220x220.jpg_.webp" alt=""/>
-                </div>
-                <div class="sl-offer-text">
-                    <h4>我的测试标题</h4>
-                    <div class="mt10 clear">
-                        <div class="sl-offer-text-price">
-                            <span class="f14">￥</span><span class="f24">118</span>
-                        </div>
-                        <div class="sl-offer-text-area">
-                            <span><i class="iconfont">&#xe60c;</i>西南科技大学东六</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            {{/each}}
         </ul>
 
     </div>
 </div>
-
+{{/each}}

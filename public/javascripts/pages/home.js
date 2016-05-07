@@ -1,14 +1,14 @@
 /**
  * Created by xiaotian on 16/4/9.
  */
-require(['../lib/config'],function(){
+require(['../lib/config'], function () {
     require([
         'jquery',
         'dialog',
         'template',
         '../pages/login',
         '../pages/publish_offer',
-    ],function($, Dialog, Template, Login, Publish){
+    ], function ($, Dialog, Template, Login, Publish) {
         var pageConfig = {
             ImgBox: "#img-box",
             ImgBoxItem: "#img-box li",
@@ -28,7 +28,7 @@ require(['../lib/config'],function(){
         var timmer, $publishBtn = $(pageConfig.publishBtn);
         var bannerLength = 0; //轮播图图片的数目
 
-        function initEvent(){
+        function initEvent() {
             bannerLength = $imgBoxItem.length;
             setBannerTime();
             preBanner();
@@ -38,15 +38,15 @@ require(['../lib/config'],function(){
             Login.init();
         }
 
-        var setBannerTime = function(){
-            timmer = setInterval(controlImg,5000);
+        var setBannerTime = function () {
+            timmer = setInterval(controlImg, 5000);
         };
 
         /**
          * 获取下一个banner
          */
         function nextBanner() {
-            $next.click(function(){
+            $next.click(function () {
                 index++;
                 index < bannerLength || (index = 0);
                 getCurrentTab();
@@ -57,7 +57,7 @@ require(['../lib/config'],function(){
          * 获取上一个banner
          */
         function preBanner() {
-            $pre.click(function(){
+            $pre.click(function () {
                 index--;
                 index >= 0 || (index = bannerLength - 1);
                 getCurrentTab();
@@ -69,10 +69,10 @@ require(['../lib/config'],function(){
             $imgBoxItem.eq(index).fadeIn(300).siblings().fadeOut(300);
             $tabNavLi.eq(index).addClass('active').siblings().removeClass('active');
             changeBackgroundColor(index);
-            timmer = setInterval(controlImg,3000);
+            timmer = setInterval(controlImg, 3000);
         }
 
-        function controlImg(){
+        function controlImg() {
             index++;
             index < bannerLength || (index = 0);
             $imgBoxItem.eq(index).fadeIn(250).siblings().fadeOut(250);
@@ -85,14 +85,14 @@ require(['../lib/config'],function(){
         }
 
         function panelTabHover() {
-            $tabNavLi.hover(function(){
+            $tabNavLi.hover(function () {
                 clearInterval(timmer);
                 $(this).addClass('active').siblings().removeClass('active');
                 index = $(this).index();
                 $imgBoxItem.eq(index).fadeIn(300).siblings().fadeOut(300);
                 changeBackgroundColor(index);
-            },function(){
-                timmer = setInterval(controlImg,3000);
+            }, function () {
+                timmer = setInterval(controlImg, 3000);
             });
         }
 
@@ -101,7 +101,7 @@ require(['../lib/config'],function(){
          */
         function changeBackgroundColor(index) {
             var className = "sl-bg-blue";
-            switch (index){
+            switch (index) {
                 case 0:
                     className = "sl-bg-blue";
                     break;
@@ -121,13 +121,18 @@ require(['../lib/config'],function(){
         }
 
         function showPublishDialog() {
-            $publishBtn.click(function(){
-                var data = {name:"wutian"};
+            $publishBtn.click(function () {
+                var data = {name: "wutian"};
 
                 var html = Template('publish_offer', data);
                 Dialog.defaults.transition = "zoom";
-                Dialog.confirm()
-                    .set({'labels':{ok:'发布', cancel:'取消'}, 'title':"发布闲置"})
+                Dialog.confirm("", function () {
+                        Publish.publishOffer();
+                    },
+                    function () {
+                        //取消
+                    })
+                    .set({'labels': {ok: '发布', cancel: '取消'}, 'title': "发布闲置"})
                     .setContent(html)
                     .show();
                 Publish.init();
@@ -137,7 +142,7 @@ require(['../lib/config'],function(){
         /**
          * 显示登录框
          */
-        function showLoginDialog () {
+        function showLoginDialog() {
 
         }
 

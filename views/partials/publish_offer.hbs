@@ -3,12 +3,12 @@
 
 <script id="publish_offer" type="text/html">
     <div class="sl-publish">
-        <form id="demo_13" action="" autocomplete="off" data-validator-option="{theme:'yellow_right_effect',stopOnError:true}">
+        <form id="publish-offer-form" action="" autocomplete="off" data-validator-option="{theme:'yellow_right_effect',stopOnError:true}">
             <fieldset>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">所属分类</span>
-                    <select name="" id="main-category" class="sl-select "></select>
-                    <select name="" id="sub-category" class="sl-select"></select>
+                    <select id="main-category" class="sl-select "></select>
+                    <select  id="sub-category" class="sl-select"></select>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">所属区域</span>
@@ -19,35 +19,35 @@
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">信息标题</span>
-                    <input type="text" name="title" placeholder="信息标题" data-rule="信息标题:required;username"  class="sl-input w270"/>
+                    <input id="offer-title" type="text" name="title" placeholder="信息标题" data-rule="信息标题:required;username"  class="sl-input w270"/>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label" >价格</span>
-                    <input type="text" name="price" data-rule="价格:required;integer;"/>
+                    <input id="offer-price" type="text" name="price" data-rule="价格:required;integer;"/>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">数量</span>
-                    <input type="text" name="number" data-rule="数量:required;integer;"/>
+                    <input id="offer-num" type="text" name="number" data-rule="数量:required;integer;"/>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">地址</span>
-                    <input type="text"/>
+                    <input id="offer-detail-area" type="text"/>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">新旧程度</span>
-                    <select name="" id=""  class=" sl-select">
+                    <select name="" id="offer-degree"  class=" sl-select">
                         <option value="">请选择新旧程度</option>
-                        <option value="">全新</option>
-                        <option value="">9成新</option>
-                        <option value="">8成新</option>
-                        <option value="">7成新</option>
-                        <option value="">6成新</option>
-                        <option value="">6成新以下</option>
+                        <option value="全新">全新</option>
+                        <option value="9成新">9成新</option>
+                        <option value="8成新">8成新</option>
+                        <option value="7成新">7成新</option>
+                        <option value="6成新">6成新</option>
+                        <option value="6成新以下">6成新以下</option>
                     </select>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">联系电话</span>
-                    <input name="tel" type="text" class="sl-input"  data-rule="联系电话:required; mobile"
+                    <input name="tel" id="tel-num" type="text" class="sl-input"  data-rule="联系电话:required; mobile"
                            data-rule-mobile="[/^1[3458]\d{9}$/, '请检查手机号格式']" placeholder="请输入手机号码"/>
                 </div>
             </fieldset>
@@ -56,8 +56,7 @@
         <form id= "uploadForm">
             <input type="file" name="img"/>
             <a href="javascript:;" id="upload-btn">上传</a>
-            <div id="img-wrapper">
-            </div>
+            <div id="img-wrapper"></div>
         </form>
         <!--\图片上传-->
     </div>

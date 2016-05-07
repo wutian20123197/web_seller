@@ -13,6 +13,7 @@ var bodyParser     =  require("body-parser");
 var UserController = require("./controller/userController").modelInfo;
 var CategoryController = require("./controller/categoryController").modelInfo;
 var UploadController = require("./controller/uploadController").modelInfo;
+var OfferDetailController = require("./controller/offerController").modelInfo;
 
 
 var fs = require('fs');
@@ -44,6 +45,9 @@ app.post("/getSubCategoryList", CategoryController.getSubCategoryList);
 
 //图片上传
 app.post("/uploadPicture", UploadController.upload);
+
+//发布offer
+app.post("/addOffer",OfferDetailController.addOffer );
 
 app.get("/public/upload/:filename",function(req, res){
     var fileName = req.params.filename;

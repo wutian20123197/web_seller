@@ -26,6 +26,11 @@ define('model',[
             name: "get_sub_category_list",
             url: '/getSubCategoryList',
             type: "post"
+        },
+        {
+            name: "add_offer",
+            url: "/addOffer",
+            type: "post"
         }
     ];
 
