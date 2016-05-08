@@ -9,7 +9,7 @@ var fs = require('fs');
 var exp = {
     upload: function(req , res){
         var form = new formidable.IncomingForm();
-        form.uploadDir = './public/tmp';  //文件上传 临时文件存放路径
+        form.uploadDir =  './public/tmp';  //文件上传 临时文件存放路径
         form.parse(req, function(error, fields, files){
             var file = files.img;
             var fName = (new Date()).getTime();
@@ -30,9 +30,13 @@ var exp = {
                     res.write(err+"\n");
                     res.end();
                 }
-                res.send({data: uploadDir});
+                res.send({data: uploadDir.substring(1)}); //将相对路径转换为绝对路径
             });
         });
+    },
+
+    showImg: function(){
+
     }
 };
 

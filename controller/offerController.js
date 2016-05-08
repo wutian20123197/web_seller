@@ -2,6 +2,7 @@
  * Created by wutian on 2016/5/7.
  */
 var offerModel = require('../model/offer_details_model').model;
+var mongoose = require('mongoose');
 
 var exp = {
 
@@ -30,6 +31,17 @@ var exp = {
         offerModel.find(conditions, function(err, info){
            console.log(info);
            return info;
+        });
+    },
+
+    /**
+     * 获取offer详情
+     */
+    getOfferDetail: function(req, res){
+        var offerId = mongoose.Types.ObjectId(req.params.id);
+        var conditions = {_id: offerId};
+        offerModel.findOne(conditions, function(err, info){
+            res.render('detail',info);
         });
     }
 };

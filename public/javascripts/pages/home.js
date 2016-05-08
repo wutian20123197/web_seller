@@ -34,8 +34,8 @@ require(['../lib/config'], function () {
             preBanner();
             nextBanner();
             panelTabHover();
-            showPublishDialog();
             Login.init();
+            Publish.showPublishDialog();
         }
 
         var setBannerTime = function () {
@@ -118,25 +118,6 @@ require(['../lib/config'], function () {
                     break;
             }
             slBanner.className = className;
-        }
-
-        function showPublishDialog() {
-            $publishBtn.click(function () {
-                var data = {name: "wutian"};
-
-                var html = Template('publish_offer', data);
-                Dialog.defaults.transition = "zoom";
-                Dialog.confirm("", function () {
-                        Publish.publishOffer();
-                    },
-                    function () {
-                        //取消
-                    })
-                    .set({'labels': {ok: '发布', cancel: '取消'}, 'title': "发布闲置"})
-                    .setContent(html)
-                    .show();
-                Publish.init();
-            });
         }
 
         /**

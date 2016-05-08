@@ -1,5 +1,5 @@
 <!--发布offer模板-->
-<link rel="stylesheet" href="javascripts/components/validator/jquery.validator.css"/>
+<link rel="stylesheet" href="/javascripts/components/validator/jquery.validator.css"/>
 
 <script id="publish_offer" type="text/html">
     <div class="sl-publish">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">信息标题</span>
-                    <input id="offer-title" type="text" name="title" placeholder="信息标题" data-rule="信息标题:required;username"  class="sl-input w270"/>
+                    <input id="offer-title" type="text" name="title" placeholder="信息标题" data-rule="信息标题:required;"  class="sl-input w270"/>
                 </div>
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label" >价格</span>
@@ -49,6 +49,10 @@
                     <span class="sl-publish-item-label">联系电话</span>
                     <input name="tel" id="tel-num" type="text" class="sl-input"  data-rule="联系电话:required; mobile"
                            data-rule-mobile="[/^1[3458]\d{9}$/, '请检查手机号格式']" placeholder="请输入手机号码"/>
+                </div>
+                <div class="sl-publish-item">
+                    <span class="sl-publish-item-label">详情介绍</span>
+                    <textarea class="detail-description"></textarea>
                 </div>
             </fieldset>
         </form>

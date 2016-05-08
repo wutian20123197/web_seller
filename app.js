@@ -22,9 +22,7 @@ var fs = require('fs');
 //连接数据库
 mongoose.connect('mongodb://127.0.0.1:27017/seller');
 
-app.get('/detail', function(req, res){
-    res.render('detail');
-});
+app.get('/detail/:id', OfferDetailController.getOfferDetail);
 
 app.use( bodyParser.urlencoded({ extended: true })); // json格式解析
 

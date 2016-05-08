@@ -1,4 +1,4 @@
-<script src="javascripts/lib/require.js" data-main="javascripts/pages/detail"></script>
+<script src="/javascripts/lib/require.js" data-main="/javascripts/pages/detail.js"></script>
 <div class="sl-detail">
     <div class="head">
         <ul class="clear">
@@ -15,7 +15,7 @@
             <li class="head-item">
                 <p>最近编辑</p>
 
-                <p> 2016-04-23 18:33</p>
+                <p>{{create_time}}</p>
             </li>
             <li class="head-item-right">
                 <a href="">举报改物品</a>
@@ -25,38 +25,29 @@
     <div class="sl-offer-detail-body clear">
         <div class="img-list">
             <div class="max-pic">
-                <img src="https://cbu01.alicdn.com/img/ibank/2016/713/130/2783031317_1296207758.400x400.jpg" alt=""/>
+                <img src="{{main_img}}" alt=""/>
             </div>
             <div class="min-pic-list">
                 <ul class="clear">
-                    <li class="item"><img
-                            src="https://cbu01.alicdn.com/img/ibank/2015/630/958/2475859036_1927769647.60x60.jpg"
-                            alt=""/></li>
-                    <li class="item"><img
-                            src="https://cbu01.alicdn.com/img/ibank/2015/630/958/2475859036_1927769647.60x60.jpg"
-                            alt=""/></li>
-                    <li class="item"><img
-                            src="https://cbu01.alicdn.com/img/ibank/2015/630/958/2475859036_1927769647.60x60.jpg"
-                            alt=""/></li>
-                    <li class="item"><img
-                            src="https://cbu01.alicdn.com/img/ibank/2015/610/697/2479796016_1927769647.60x60.jpg"
-                            alt=""/></li>
+                    {{#each img_list}}
+                        <li class="item"><img src="{{img_url}}" alt=""/></li>
+                    {{/each}}
                 </ul>
             </div>
             <span><i class="iconfont mr5">&#xe604;</i>收藏产品(15)</span>
         </div>
         <div class="detail-text">
             <div class="detail-text-strong">
-                <h2>全新IpadMini2 32G版本国行</h2>
-                <span class="label">价格： </span><span class="orange mr5">￥</span><span class="f24 orange">20.00</span>
+                <h2>{{offer_title}}</h2>
+                <span class="label">价格： </span><span class="orange mr5">￥</span><span class="f24 orange">{{offer_price}}</span>
             </div>
             <p class="item"><span class="label">新旧程度： </span><span class="orange">全新</span></p>
 
-            <p class="item"><span class="label">交易地点： </span><span>西科大东六宿舍</span></p>
+            <p class="item"><span class="label">交易地点： </span><span>{{offer_area}} {{offer_detail_area}}</span></p>
 
-            <p class="item"><span class="label">来自用户： </span><span>句号小弟</span></p>
+            <p class="item"><span class="label">来自用户： </span><span></span></p>
 
-            <p class="item"><span class="label">联系人： </span><span>狮子</span></p>
+            <p class="item"><span class="label">联系人： </span><span></span></p>
 
             <p class="item"><span class="label">联系电话： </span><span>18084887501</span></p>
 
@@ -75,25 +66,26 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-content-item tab-content-current">
-                        无暗病无id无锁，64gwifi版，99新，指纹有问题，其他都完美，一口价不议价，
+                       {{detail_text}}
                     </div>
                     <div class="tab-content-item">
                         <!--留言模块-->
-                       <div class="sl-detail-record-words">
+                        <div class="sl-detail-record-words">
                             <div class="sl-detail-do-records clear">
                                 <div class="sl-detail-do-records-wrapper">
                                     <div class="sl-detail-user">
-                                        <img src="//wwc.alicdn.com/avatar/getAvatar.do?userId=0&width=60&height=60&type=sns" alt=""/>
+                                        <img src="//wwc.alicdn.com/avatar/getAvatar.do?userId=0&width=60&height=60&type=sns"
+                                             alt=""/>
                                     </div>
                                     <div class="sl-detail-add">
                                         <textarea></textarea>
                                     </div>
                                 </div>
                             </div>
-                           <div class="sl-detail-records-list">
+                            <div class="sl-detail-records-list">
 
-                           </div>
-                       </div>
+                            </div>
+                        </div>
                         <!--/留言模块-->
                     </div>
                 </div>
@@ -102,20 +94,27 @@
         </div>
         <!--猜你喜欢-->
         <div class="right">
-         <h4>猜你喜欢</h4>
+            <h4>猜你喜欢</h4>
+
             <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp" alt=""/>
+                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
+                     alt=""/>
+
                 <p class="price">￥22</p>
             </div>
             <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp" alt=""/>
+                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
+                     alt=""/>
+
                 <p class="price">￥22</p>
             </div>
             <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp" alt=""/>
+                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
+                     alt=""/>
             </div>
             <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp" alt=""/>
+                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
+                     alt=""/>
             </div>
         </div>
         <!--/猜你喜欢-->

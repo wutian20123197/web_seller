@@ -5,10 +5,12 @@ define('../pages/publish_offer', [
     'jquery',
     'validator',
     'model',
-    'dialog'
-], function ($, Valid, Model, Dialog) {
+    'dialog',
+    'template'
+], function ($, Valid, Model, Dialog, Template  ) {
     var config = {
         mainCategory: "#main-category",
+        publishBtn: ".btn-publish",
         subCategory: "#sub-category",
         uploadForm: "#uploadForm",
         uploadBtn: "#upload-btn",
@@ -20,11 +22,12 @@ define('../pages/publish_offer', [
         offerNum: "#offer-num",
         offerDetailArea: "#offer-detail-area",
         offerDegree: "#offer-degree",
-        offerTelNum: "#tel-num"
+        offerTelNum: "#tel-num",
+        detailText: ".detail-description"
     };
     var $mainCategory, $subCategory, $uploadBtn, $imgWrapper, $publishOfferForm,
         $offerArea, $offerTitle, $offerPrice, $offerNum, $offerDetailArea,
-        $offerDegree, $offerTelNum;
+        $offerDegree, $offerTelNum, $publishBtn, $detailText;
 
     var exports = {
         init: function () {
@@ -40,6 +43,7 @@ define('../pages/publish_offer', [
             $offerDetailArea = $(config.offerDetailArea);
             $offerDegree = $(config.offerDegree);
             $offerTelNum = $(config.offerTelNum);
+            $detailText = $(config.detailText);
             this.initEvents();
         },
 
@@ -47,6 +51,28 @@ define('../pages/publish_offer', [
             this.getMainCategoryList();
             $mainCategory.bind('change', this.getSubCategorysByID);
             $uploadBtn.bind('click', this.uploadImg);
+        },
+
+        /**
+         * 初始化弹框事件
+         */
+        showPublishDialog: function () {
+            $publishBtn = $(config.publishBtn);
+            $publishBtn.click(function () {
+                var data = {};
+                var html = Template('publish_offer', data);
+                Dialog.defaults.transition = "zoom";
+                Dialog.confirm("", function () {
+                        exports.publishOffer();
+                    },
+                    function () {
+                        //取消
+                    })
+                    .set({'labels': {ok: '发布', cancel: '取消'}, 'title': "发布闲置"})
+                    .setContent(html)
+                    .show();
+                exports.init();
+            });
         },
 
         /**
@@ -109,7 +135,7 @@ define('../pages/publish_offer', [
         publishOffer: function () {
             //校验表单
             var isValid = $publishOfferForm.isValid();
-            if(isValid){
+            if (isValid) {
                 var params = {};
                 params.main_category = $mainCategory.val();
                 params.sub_category = $subCategory.val();
@@ -120,7 +146,9 @@ define('../pages/publish_offer', [
                 params.offer_detail_area = $offerDetailArea.val();
                 params.offer_degree = $offerDegree.val();
                 params.img_list = this.getImages();
-                params.main_img =  params.img_list[0].img_url;
+                params.main_img = params.img_list[0].img_url;
+                params.detail_text = $detailText.val();
+                params.tel_num = $offerTelNum.val();
 
                 Model.getRequestByParams("add_offer", params, function (res) {
                     if (res.code === 200) {

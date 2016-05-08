@@ -2,7 +2,7 @@
  * 配置requirejs
  */
 requirejs.config({
-    baseUrl: "javascripts/lib",
+    baseUrl: "/javascripts/lib",
     paths: {
         "jquery": "jquery.min",
         "tabs" : "../components/tabs", //选项卡组件

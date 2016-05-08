@@ -42,15 +42,28 @@
       .max-pic {
         img {
           width: 380px;
+          height: 380px;
         }
       }
 
       .min-pic-list {
         padding: 20px 0;
 
+        .current {
+          border: 1px solid @orange;
+        }
+
         .item {
           float: left;
           margin-right: 8px;
+
+          &:hover {
+            cursor: pointer;
+          }
+          img {
+            width: 60px;
+            height: 60px;
+          }
         }
       }
 
