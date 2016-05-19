@@ -1,0 +1,189 @@
+<script src="/javascripts/lib/require.js" data-main="/javascripts/pages/user_detail_info"></script>
+<main class="main-content clearfix">
+    <!--nav start-->
+    <nav class="nav-left">
+        <ul id="navItem">
+            <li class="active">个人信息</li>
+            <li>修改密码</li>
+            <li>个人消息</li>
+            <li>我的发布</li>
+            <li>我的收藏</li>
+        </ul>
+    </nav>
+    <!--nav end-->
+    <!--detail-info start-->
+    <section id="info" class="info">
+        <!--头像上传 start-->
+        <aside id="picSet" class="detail-info">
+            <figure class="pic-group">
+                <div class="logo-wrapper">
+                    <img class="pre-view-offer-img" width="100" height="100"  src=" {{userInfo.head_img}}"/>
+                </div>
+                <form id="upload-head-form">
+                    <div class="info-item">
+                        <span>设置头像：</span> <input type="file" name="img">
+                    </div>
+                    <div class="info-item">
+                        <span>上传头像：</span>
+                        <button id="upload-logo-btn" type="button">上传头像</button>
+                    </div>
+                    <div class="info-item">
+                        <span>昵称&nbsp;&nbsp;：</span> <input type="text" value="{{userInfo.nick_name}}" id="nick-name" class="sl-input"/>
+                    </div>
+                    <div class="info-item">
+                        <span>性别&nbsp;&nbsp;：</span>
+                        <select name="" id="sex-type" class="sl-select">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                            <option value="保密">保密</option>
+                        </select>
+                    </div>
+                </form>
+                <button  class="btn info-save" id="save-user-info">保存</button>
+            </figure>
+
+        </aside>
+        <!--头像上传 end-->
+        <!--密码设置 start-->
+        <aside id="changePwd" class="detail-info show-none">
+            <form id="password-reset-form" action="" autocomplete="off"
+                  data-validator-option="{theme:'yellow_right_effect',stopOnError:true}">
+                <div class="input-group clearfix">
+                    <div class="input-left">
+                        当前密码：
+                    </div>
+                    <div class="input-right">
+                        <input id="current-password" type="password" placeholder="当前密码">
+                    </div>
+                </div>
+
+                <div class="input-group clearfix">
+                    <div class="input-left">
+                        新密码：
+                    </div>
+                    <div class="input-right">
+                        <input id="new-password" type="password" placeholder="新密码">
+                    </div>
+                </div>
+
+                <div class="input-group clearfix">
+                    <div class="input-left">
+                        确认密码：
+                    </div>
+                    <div class="input-right">
+                        <input id="confirm-new-password" type="password" placeholder="确认密码">
+                    </div>
+                </div>
+            </form>
+            <div class="input-group clearfix">
+                <div class="input-left">
+
+                </div>
+                <div class="input-right">
+                    <button id="change-password" class="btn btn-block">保存</button>
+                </div>
+            </div>
+        </aside>
+        <!--密码设置 end-->
+
+        <!--个人消息 start-->
+        <aside id="myMessage" class="detail-info show-none">
+            <div class="message-group clearfix">
+                <div class="message-left">
+                    <img src="logo.png">
+                </div>
+                <div class="message-right">
+                    <a href="#">二手物品链接</a>
+
+                    <p>消息内容</p>
+                    <textarea rows="3" placeholder="回复消息"></textarea>
+                    <button class="btn btn-block">回复</button>
+                </div>
+            </div>
+
+            <div class="message-group clearfix">
+                <div class="message-left">
+                    <img src="logo.png">
+                </div>
+                <div class="message-right">
+                    <a href="#">二手物品链接</a>
+
+                    <p>消息内容</p>
+                    <textarea rows="3" placeholder="回复消息"></textarea>
+                    <button class="btn btn-block">回复</button>
+                </div>
+            </div>
+
+            <div class="message-group clearfix">
+                <div class="message-left">
+                    <img src="logo.png">
+                </div>
+                <div class="message-right">
+                    <a href="#">二手物品链接</a>
+
+                    <p>消息内容</p>
+                    <textarea rows="3" placeholder="回复消息"></textarea>
+                    <button class="btn btn-block">回复</button>
+                </div>
+            </div>
+
+        </aside>
+        <!--个人消息 end-->
+        <!--我的发布 start-->
+        <aside id="myPublish" class="detail-info show-none">
+            <div class="publish-group clearfix">
+                <div class="publish-left">
+                    <a href="#">二手物品链接</a>
+                </div>
+                <div class="publish-center">
+                    <button class="btn">下架</button>
+                </div>
+                <div class="publish-right">
+                    <button class="btn">修改</button>
+                </div>
+            </div>
+            <div class="publish-group clearfix">
+                <div class="publish-left">
+                    <a href="#">二手物品链接</a>
+                </div>
+                <div class="publish-center">
+                    <button class="btn">下架</button>
+                </div>
+                <div class="publish-right">
+                    <button class="btn">修改</button>
+                </div>
+            </div>
+            <div class="publish-group clearfix">
+                <div class="publish-left">
+                    <a href="#">二手物品链接</a>
+                </div>
+                <div class="publish-center">
+                    <button class="btn">下架</button>
+                </div>
+                <div class="publish-right">
+                    <button class="btn">修改</button>
+                </div>
+            </div>
+        </aside>
+        <!--我的发布 end-->
+        <!--我的收藏 start-->
+        <aside id="myCollect" class="detail-info show-none">
+            {{#each collectList}}
+           <div class="collect-list clear">
+               <div class="left">
+                   <a href="/detail/{{_id}}">
+                       <img src="{{main_img}}" alt="" width="100" height="100"/>
+                       <span>{{offer_title}}</span>
+                   </a>
+               </div>
+               <div class="right">
+                   <a href="javascript:;" class="btn btn-orange remove" data-id="{{_id}}">移除</a>
+               </div>
+           </div>
+            {{/each}}
+        </aside>
+        <!--我的收藏 end-->
+
+    </section>
+    <!--detail-info end-->
+</main>

@@ -17,6 +17,8 @@ var offerDetailSchema = new Schema({
     detail_text: String,
     tel_num: String,
     offer_degree: String,
+    collect_num: Number,
+    is_reported:{type: Boolean, default: false},
     img_list: [{
         img_url: String
     }]

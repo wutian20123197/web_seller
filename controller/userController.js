@@ -2,25 +2,14 @@
  * Created by wutian on 2016/5/3.
  */
 var userModel = require('../model/user_model').user;
-var express=require("express");
-var app=express();
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-
-app.use(session({
-    secret: 'web_seller',
-    resave: false,
-    saveUninitialized:false
-}));
-
+var offerModel = require('../model/offer_details_model').model;
+var mongoose = require('mongoose');
 var exp = {
     /**
      * 用户登录
      */
     onLogin: function (req, res){
         var ans;
-        console.log(req.session);
-        console.log(req.body.account);
         userModel.findOne(req.body,function(err,info) {
             if(err){
                 ans = {code: -100, message: "系统错误"};
@@ -28,8 +17,8 @@ var exp = {
                 if(!info){
                     ans = {code: -100, message: "用户名密码不匹配"};
                 }else{
-                   ans =  {code: 200, message: ""};
-                    //req.session.account = 12312;
+                   ans =  {code: 200, message: "", data:{account: req.body.account}};
+                    req.session.account = req.body.account;
                 }
             }
             res.send(ans);
@@ -47,6 +36,103 @@ var exp = {
         });
         ans = {code: 200, message: ""};
         res.send(ans);
+    },
+
+    /**
+     * 获取用户名
+     */
+    getUserName: function(req, res) {
+        var account =req.session.account;
+        if(account ){
+            res.send({code:200,isLogin:true,account:account});
+        }else{
+            res.send({code:200,isLogin:false,account:account});
+        }
+    },
+
+    /**
+     * 更新用户信息
+     */
+    updateUserInfo: function(req, res){
+        var account =req.session.account;
+        account = "807572915"; //TODO
+        userModel.update({account: account},{$set:req.body},function(err, info){
+           if(err){
+               res.send({code:-100,message: "系统错误"});
+           }else{
+               res.send({code:200, data:{}});
+           }
+        });
+    },
+
+    /**
+     * 获取用户收藏夹信息
+     */
+    getMyCollects: function(req, res) {
+        var account = req.session.account;
+        account = "333333"; //TODO
+        var collectIds = [];
+        userModel.findOne({account: account}, function(err, info){
+            var list = info.collect_list || [];
+            offerModel.find({_id: {$in: list}}, function(err, ans){
+                res.send({code:200, data:ans});
+            });
+        });
+    },
+
+    /**
+     * 用户详情页 获取所有需要渲染的数据
+     */
+    userMainPage: function(req, res){
+        var account = req.session.account;
+        account = "807572915"; //TODO
+        var Data = {};
+        userModel.findOne({account: account}, function(err, userInfo){
+            var list = userInfo.collect_list || [];
+            Data.userInfo = userInfo;
+            offerModel.find({_id: {$in: list}}, function(err, ans){
+                Data.collectList = ans;
+                res.render("user_detail_info", Data);
+            });
+        });
+    },
+
+    /**
+     * 移除收藏的offer
+     */
+    removeCollectedOffer: function(req, res) {
+        var account = req.session.account;
+        account = "807572915"; //TODO
+        var offerId = mongoose.Types.ObjectId(req.body.id);
+        userModel.findOne({account: account}, function (err, info) {
+            var collectList = info.collect_list || [];
+            collectList.pop(offerId);
+            userModel.update({account: account},{$set: {collect_list: collectList}}, function(err, info){
+                if(!err){
+                    res.send({code:200, message:"商品移除成功"});
+                }else{
+                    res.send({code:-100, message:"商品移除失败"});
+                }
+            });
+        });
+    },
+
+    updateUserPassword: function(req, res) {
+        var account = req.body.account;
+        var password = req.body.password;
+        var newpassword = req.body.newpassword;
+        userModel.findOne({account: account,password: password},function(err, info){
+            if(info){
+                userModel.update({account: account},{$set:{password: newpassword}},function(err, info){
+                    if(!err){
+                        res.send({code:200, message:"修改成功"});
+                    }
+                });
+            }else{
+                res.send({code:-100, message:"密码错误"});
+            }
+        });
+
     }
 };
 

@@ -31,6 +31,45 @@ define('model',[
             name: "add_offer",
             url: "/addOffer",
             type: "post"
+        },
+        {
+            name: 'get_offer_list_bysubcategory',
+            url: "/categoryOfferList",
+            type: "post"
+        },
+        {
+            name: "get_user_is_login",
+            url: "/getUserIsLogin"
+        },
+        {
+            name: "update_user_info",
+            url: "/updateUserInfo",
+            type: "post"
+        },
+        {
+            name: "update_user_password",
+            url: "/updatePassword",
+            type: "post"
+        },
+        {
+            name: "collect_offer",
+            url: "/collectOffer",
+            type: "post"
+        },
+        {
+            name: "report_offer",
+            url: "/reportOffer",
+            type: "post"
+        },
+        {
+            name: "get_collect_list",
+            url: "/getCollectList",
+            type: "post"
+        },
+        {
+            name: "remove_my_collect_offer",
+            url: "/removeMyCollectOffer",
+            type: "post"
         }
     ];
 
@@ -58,7 +97,7 @@ define('model',[
                 url: url,
                 type: type,
                 dataType: "json",
-                data: params,
+                data: this.deleteNullParams(params),
                 success: function(data) {
                     if(data.code === 200){
                         fn(data);
@@ -67,10 +106,23 @@ define('model',[
                         return false;
                     }
                 },
-                error: function() {
+                error: function(err) {
                     alert("系统错误");
+                    console.log(err);
                 }
             });
+        },
+
+        /**
+         * 删除空参数
+         */
+        deleteNullParams: function(params){
+            for(var name in params){
+                if(! params[name]){
+                    delete  params[name];
+                }
+            }
+            return params;
         }
     };
 

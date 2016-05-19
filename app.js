@@ -15,6 +15,17 @@ var CategoryController = require("./controller/categoryController").modelInfo;
 var UploadController = require("./controller/uploadController").modelInfo;
 var OfferDetailController = require("./controller/offerController").modelInfo;
 
+/*设置session*/
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+var app = express();
+app.use(session({
+        secret: '12345',
+         name: 'testapp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
+        cookie: {maxAge: 800000000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+        resave: false,
+       saveUninitialized: true
+     }));
 
 var fs = require('fs');
 
@@ -46,6 +57,36 @@ app.post("/uploadPicture", UploadController.upload);
 
 //发布offer
 app.post("/addOffer",OfferDetailController.addOffer );
+
+//子类目页面
+app.get("/category/:subCategory",OfferDetailController.renderCategoryPage);
+
+//获取子类目下面的offerList列表
+app.post("/categoryOfferList",OfferDetailController.getOfferListBySubCategoryName);
+
+//个人信息页
+app.get("/userDetailInfo", UserController.userMainPage);
+
+//更新用户信息
+app.post('/updateUserInfo', UserController.updateUserInfo);
+
+//获取用户登录情况
+app.get("/getUserIsLogin",UserController.getUserName);
+
+//修改密码
+app.post("/updatePassword", UserController.updateUserPassword);
+
+//收藏商品
+app.post("/collectOffer", OfferDetailController.addCollectionOffer);
+
+//举报商品
+app.post("/reportOffer", OfferDetailController.reportOffer);
+
+//获取我的收藏列表
+app.post("/getCollectList", UserController.getMyCollects);
+
+//移除收藏夹中的商品
+app.post("/removeMyCollectOffer", UserController.removeCollectedOffer);
 
 app.get("/public/upload/:filename",function(req, res){
     var fileName = req.params.filename;

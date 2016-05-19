@@ -1,0 +1,41 @@
+.sl-category {
+  width: 1190px;
+  margin: 20px auto;
+
+  .sl-category-head {
+    background-color: @categoty-head;
+    padding-left: 15px;
+    height: 40px;
+    line-height: 40px;
+    margin-top: 10px;
+  }
+
+  .sl-category-item {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid @border;
+
+    .sl-category-item-label {
+      display: inline-block;
+      font-size: 14px;
+      width: 140px;
+      margin-left: 15px;
+      float: left;
+    }
+    .sl-category-item-list {
+      float: left;
+
+      .current {
+        color: @orange;
+      }
+
+      .sl-input {
+        width: 32px;
+      }
+      .sl-category-item-content {
+        float: left;
+        width: 146px;
+      }
+    }
+  }
+}

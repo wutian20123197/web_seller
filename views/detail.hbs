@@ -18,7 +18,7 @@
                 <p>{{create_time}}</p>
             </li>
             <li class="head-item-right">
-                <a href="">举报改物品</a>
+                <a href="javascript:;" id="report-offer" data-id="{{_id}}">举报改物品</a>
             </li>
         </ul>
     </div>
@@ -34,14 +34,14 @@
                     {{/each}}
                 </ul>
             </div>
-            <span><i class="iconfont mr5">&#xe604;</i>收藏产品(15)</span>
+            <a class="collect-offer" href="javascript:;" data-id="{{_id}}"><i class="iconfont mr5">&#xe604;</i>收藏产品<span id="collect-num">{{collect_num}}</span></a>
         </div>
         <div class="detail-text">
             <div class="detail-text-strong">
                 <h2>{{offer_title}}</h2>
                 <span class="label">价格： </span><span class="orange mr5">￥</span><span class="f24 orange">{{offer_price}}</span>
             </div>
-            <p class="item"><span class="label">新旧程度： </span><span class="orange">全新</span></p>
+            <p class="item"><span class="label">新旧程度： </span><span class="orange">{{offer_degree}}</span></p>
 
             <p class="item"><span class="label">交易地点： </span><span>{{offer_area}} {{offer_detail_area}}</span></p>
 
@@ -70,7 +70,7 @@
                     </div>
                     <div class="tab-content-item">
                         <!--留言模块-->
-                        <div class="sl-detail-record-words">
+                        <div class="sl-detail-record-words clear">
                             <div class="sl-detail-do-records clear">
                                 <div class="sl-detail-do-records-wrapper">
                                     <div class="sl-detail-user">
@@ -81,11 +81,43 @@
                                         <textarea></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="sl-detail-records-list">
-
+                                <div class="message">
+                                    <a href="javascript:;" class="btn btn-orange">发表</a>
+                                </div>
                             </div>
                         </div>
+                        <ul class="sl-detail-records-list">
+                            <li>
+                               <div class="item-message clear">
+                                   <div class="head-logo">
+                                       <img src="https://wwc.alicdn.com/avatar/getAvatar.do?userId=678364079&width=30&height=30&type=sns"
+                                            alt="" width="30" height="30"/>
+                                   </div>
+                                   <div class="content">
+                                       稀土元素玻璃柯克镜头，成像极锐，画角大气，对焦明亮有放大辅助，可惜机身用料突出轻便全是塑料。一朵鲜花插在牛粪上了?
+                                       稀土元素玻璃柯克镜头，成像极锐，画角大气，对焦明亮有放大辅助，可惜机身用料突出轻便全是塑料。一朵鲜花插在牛粪上了?
+
+                                   </div>
+                                   <div class="send-btn">
+                                       <a href="javascript:;">回复</a>
+                                   </div>
+                               </div>
+                            </li>
+                            <li>
+                                <div class="item-message clear">
+                                    <div class="head-logo">
+                                        <img src="https://wwc.alicdn.com/avatar/getAvatar.do?userId=678364079&width=30&height=30&type=sns"
+                                             alt="" width="30" height="30"/>
+                                    </div>
+                                    <div class="content">
+                                        稀土元素玻璃柯克镜头，成像极锐，画角大气，对焦明亮有放大辅助，可惜机身用料突出轻便全是塑料。一朵鲜花插在牛粪上了?
+                                    </div>
+                                    <div class="send-btn">
+                                        <a href="javascript:;">回复</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                         <!--/留言模块-->
                     </div>
                 </div>

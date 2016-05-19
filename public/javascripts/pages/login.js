@@ -96,6 +96,10 @@ define('../pages/login', [
                     "email": email
                 };
                 Model.getRequestByParams('do_register', params, function (data) {
+                    if(data.code === 200){
+                        Dialog.confirm().close();//关闭注册框
+                        Dialog.success("注册成功，请登录！");
+                    }
                 });
             },
 
@@ -107,6 +111,11 @@ define('../pages/login', [
                params.account = $(config.loginAccount).val();
                params.password = $(config.loginPassword).val();
                 Model.getRequestByParams('do_login', params, function (data) {
+                    if(data.code === 200){
+                        Dialog.confirm().close();
+                        localStorage.setItem('account',data.data.account) ;
+                        window.location.reload();
+                    }
                 });
             },
 
@@ -124,10 +133,30 @@ define('../pages/login', [
                 return true;
             }
         },
+
+        showUserName: function(){
+            Model.getRequestByParams('get_user_is_login',{}, function(data){
+                //用户已登录
+                if(data.isLogin){
+                    var html = '<span>欢迎您，'+ data.account +'</span>';
+                    $("#userName").html(html);
+                    $showRegisterDialogBtn.hide();
+                }
+            })
+        },
+
+        /**
+         * 用户已登录 显示
+         */
+        isLogin: function(){
+
+        },
+
         bindEvents: function () {
             var handlers = this.handlers;
             $showLoginDialogBtn.bind('click',{type: 0}, handlers.showDialog);
             $showRegisterDialogBtn.bind('click',{type: 1}, handlers.showDialog);
+            this.showUserName();
         }
     };
     return exports;

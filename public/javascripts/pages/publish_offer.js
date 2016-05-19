@@ -153,6 +153,7 @@ define('../pages/publish_offer', [
                 Model.getRequestByParams("add_offer", params, function (res) {
                     if (res.code === 200) {
                         Dialog.success("发布成功！");
+                        window.location.reload();
                     }
                 });
             }

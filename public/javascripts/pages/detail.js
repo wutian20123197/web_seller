@@ -6,8 +6,10 @@ require(['../lib/config'],function(){
         'jquery',
         "tabs",
         '../pages/login',
-        '../pages/publish_offer'
-    ],function($, Tabs, Login, Publish){
+        '../pages/publish_offer',
+        'model',
+        "dialog"
+    ],function($, Tabs, Login, Publish, Model, Dialog){
         var config = {
             itemPic: ".item",
             current: "current",
@@ -26,7 +28,45 @@ require(['../lib/config'],function(){
                 Login.init();
                 Publish.showPublishDialog();
                 $itemPic.bind('click', this.changePics);
-                $macPic = $(config.macPic)
+                $macPic = $(config.macPic);
+                $(".collect-offer").bind('click',this.collectOffer);
+                $("#report-offer").bind("click", this.reportOffer);
+            },
+
+            /**
+             * 举报商品
+             */
+            reportOffer: function(){
+                var $this = $(this);
+                var offerId = $this.data('id');
+                var params = {
+                    id: offerId
+                };
+                Model.getRequestByParams("report_offer", params, function(res){
+                    if(res.code === 200){
+                        Dialog.success(res.message);
+                    }
+                });
+            },
+
+            /**
+             * 收藏商品
+             */
+            collectOffer: function(){
+                var $this = $(this);
+                var offerId = $this.data('id');
+                var params = {
+                    id: offerId
+                };
+               Model.getRequestByParams('collect_offer',params, function(res){
+                    if(res.code === 200){
+                        var $collectNum = $("#collect-num");
+                        var num = $collectNum.text();
+                        num++;
+                        $collectNum.text(num);
+                        Dialog.success("收藏成功！");
+                    }
+               } );
             },
 
             changePics: function(){
