@@ -34,10 +34,10 @@ require(['../lib/config'], function () {
             + '</a>'
             + '</div>'
             + '<div class="sl-offer-text">'
-            + '<h4>{{$value.offer_title}}</h4>'
+            + '<p>{{$value.offer_title}}</p>'
             + '<div class="mt10 clear">'
             + '<div class="sl-offer-text-price">'
-            + '<span class="f14">￥</span><span class="f24">{{$value.offer_price}}</span>'
+            + '<span class="f14">￥</span><span class="f14">{{$value.offer_price}}</span>'
             + '</div>'
             + '<div class="sl-offer-text-area">'
             + '<span><i class="iconfont">&#xe60c;</i>{{$value.offer_area}}</span>'
@@ -56,8 +56,15 @@ require(['../lib/config'], function () {
                 var me = this;
                 $selectConditon = $(config.selectConditon);
                 me.initEvent();
-                subCategoryName = me.getCategoryName();
-                conditions.sub_category = subCategoryName;
+                var type = location.href.split('/')[4];
+                //type=1 表示分类查询 type=2 表示全局搜索
+                if(type == 1){
+                    subCategoryName = me.getCategoryName();
+                    conditions.sub_category = subCategoryName;
+                }else if(type == 2){
+                    var keywords = me.getCategoryName();
+                    conditions.offer_title = keywords;
+                }
                 me.setOfferListHtml(conditions);
             },
 
@@ -91,6 +98,10 @@ require(['../lib/config'], function () {
                         var render = Template.compile(me.tpl);
                         var html = render(data);
                         document.getElementById('content').innerHTML = html;
+
+                        //商品数量
+                        var totalNum = data.offerList.length;
+                       $("#offer-num").html("共"+ totalNum + "件商品");
                     });
             },
 
@@ -99,7 +110,7 @@ require(['../lib/config'], function () {
              */
             getCategoryName: function () {
                 var url = window.location.href;
-                var name = url.split('/')[4];
+                var name = url.split('/')[5];
                 return decodeURIComponent(name);
             }
 

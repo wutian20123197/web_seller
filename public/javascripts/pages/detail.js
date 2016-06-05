@@ -31,6 +31,93 @@ require(['../lib/config'],function(){
                 $macPic = $(config.macPic);
                 $(".collect-offer").bind('click',this.collectOffer);
                 $("#report-offer").bind("click", this.reportOffer);
+                $(".publish-message").bind("click", this.publishMessage);
+                $(".reply-message").bind("click", this.replyMessage);
+                $(".reply-publish-message").bind("click", this.replyPublishMessage);
+            },
+
+            /**
+             * 通过回复留言的方式发表留言
+             */
+            replyPublishMessage: function(){
+                var $this = $(this);
+                var message = $this
+                    .closest(".sl-detail-do-records")
+                    .find("textarea").val();
+                if(!message){
+                    Dialog.error("留言信息不能为空！");
+                    return false;
+                }
+                var params = {};
+                params.to_id = $this.data("id");
+                params.to_name = $this.data("name");
+                params.from_id = localStorage.getItem('account');
+                params.head_img = localStorage.getItem('headImg');
+                params.from_name = localStorage.getItem('userName');
+                params.message_content = message;
+                params.offer_id = $this.data("offerid");
+                Model.getRequestByParams('add_message', params, function(data){
+                    if(data.code === 200){
+                        Dialog.success("留言发布成功！");
+                        $this.closest(".sl-detail-do-records").find("textarea").val("");
+                        exports.setReplyMessageToList(data.data);
+                        var $current = $this.closest('li').find('.hide-item');
+                        $current.hide();
+                    }
+                })
+            },
+
+            setReplyMessageToList: function(data){
+                var html = ' <li> <div class="item-message clear"> <div class="head-logo"> <img src="' + data.head_img + '" width="30" height="30"/>'
+                    + ' <span class="user-name">'+data.from_name+ "回复"+ data.to_name +'</span> </div> <div class="content">'+ data.message_content +'</div> <div class="send-btn"> <a href="javascript:;">回复</a> </div> </div> </li>';
+                $(".sl-detail-records-list").append(html);
+            },
+
+            /**
+             * 留言回复功能
+             */
+            replyMessage: function (){
+                var $this = $(this);
+                var $current = $this.closest('li').find('.hide-item');
+                $current.show(300);
+            },
+
+            /**
+             * 发表评论
+             */
+            publishMessage: function(){
+                var $this = $(this);
+                var message = $this
+                    .closest(".sl-detail-do-records")
+                    .find("textarea").val();
+                if(!message){
+                    Dialog.error("留言信息不能为空！");
+                    return false;
+                }
+                var params = {};
+                params.to_id = $this.data("id");
+                params.to_name = $this.data("name");
+                params.from_id = localStorage.getItem('account');
+                params.head_img = localStorage.getItem('headImg');
+                params.from_name = localStorage.getItem('userName');
+                params.message_content = message;
+                params.offer_id = $this.data("offerid");
+                    Model.getRequestByParams('add_message', params, function(data){
+                        if(data.code === 200){
+                            Dialog.success("留言发布成功！");
+                            $this.closest(".sl-detail-do-records").find("textarea").val("");
+                            exports.setMessageToList(data.data);
+                        }
+                    });
+            },
+
+            /**
+             * 更新留言列表
+             */
+            setMessageToList: function(data){
+                var html = ' <li> <div class="item-message clear"> <div class="head-logo"> <img src="' + data.head_img + '" width="30" height="30"/><span class="user-name">'
+                        + data.from_name+ '</span>  </div> <div class="content">'+ data.message_content +'</div> <div class="send-btn"> <a href="javascript:;">回复</a> </div> </div> </li>';
+                $(".sl-detail-records-list").append(html);
             },
 
             /**

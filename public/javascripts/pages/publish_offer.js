@@ -149,11 +149,15 @@ define('../pages/publish_offer', [
                 params.main_img = params.img_list[0].img_url;
                 params.detail_text = $detailText.val();
                 params.tel_num = $offerTelNum.val();
+                params.contacts_name = $("#user_real_name").val();
 
                 Model.getRequestByParams("add_offer", params, function (res) {
                     if (res.code === 200) {
                         Dialog.success("发布成功！");
-                        window.location.reload();
+                        setTimeout(function(){
+                            window.location.reload();
+                        },800);
+
                     }
                 });
             }
@@ -170,6 +174,7 @@ define('../pages/publish_offer', [
             });
             return imgList;
         }
+
     };
     return exports;
 });

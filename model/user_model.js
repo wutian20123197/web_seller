@@ -8,10 +8,13 @@ var userSchema = new Schema({
     account:String,
     password: String,
     email: String,
-    head_img: String,
+    head_img: {type:String, default: "/public/upload/1463898859881.jpg"},
     collect_list:{type: Array},
     nick_name: String,
-    sex_type: String
+    state: {type:Number, default: 1},
+    sex_type: {type:String, default: "保密"},
+    real_name: String,
+    interest_list: {type: Array}
 });
 
 exports.user = mongoose.model('users',userSchema);

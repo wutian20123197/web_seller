@@ -33,6 +33,21 @@ require(['../lib/config'], function () {
                 $("#change-password").bind("click", this.updatePassword);
                 $saveUserBtn.bind('click',this.saveUserInfo);
                 $(".remove").bind("click", this.removeMyCollectOffer);
+                $(".down-offer").bind("click", this.dropDownOffer);
+            },
+
+            /**
+             * 下架offer
+             */
+            dropDownOffer: function(){
+                var $this = $(this);
+                var offerId = $this.data("id");
+                Model.getRequestByParams("drop_down_offer", {id: offerId}, function(res){
+                    if(res.code === 200){
+                        Dialog.success(res.message);
+                        $this.closest(".publish-group").remove();
+                    }
+                });
             },
 
             /**
@@ -76,21 +91,33 @@ require(['../lib/config'], function () {
             /**
              * 保存用户信息
              */
-            saveUserInfo: function(){
+            saveUserInfo: function() {
                 var nickName = $("#nick-name").val();
                 var sexType = $("#sex-type").val();
                 var headImg = $(".pre-view-offer-img").attr("src");
+                var interest = exports.getInterest();
                 var params = {
                     head_img: headImg,
                     nick_name: nickName,
                     sex_type: sexType,
-                    account: localStorage.getItem('account')
+                    account: localStorage.getItem('account'),
+                    interest_list: interest
                 };
                 Model.getRequestByParams('update_user_info',params, function(data){
                     if(data.code === 200){
                         Dialog.success("用户信息修改成功！")
                     }
                 })
+            },
+
+            //获取用户兴趣列表
+            getInterest: function(){
+                var interest = [];
+               var list =  $("#intertst input[type='checkbox']:checked");
+                $.each(list, function(i, v){
+                    interest.push(v.value);
+                });
+                return interest;
             },
 
             getCollectList: function(){
@@ -103,6 +130,13 @@ require(['../lib/config'], function () {
              * 修改密码
              */
             updatePassword: function(){
+
+                var isValid = $("#password-reset-form").isValid();
+                console.log(isValid);
+                if (!isValid) {
+                    return false;
+                }
+
                 var account = localStorage.getItem('account');
                 var password = $("#current-password").val();
                 var newPassword = $("#new-password").val();
@@ -157,7 +191,6 @@ require(['../lib/config'], function () {
                         break;
                     case "我的收藏":
                         $("#myCollect").removeClass("show-none");
-                        exports.getCollectList();
                         break;
                     default :break;
                 }

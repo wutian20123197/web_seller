@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/less/seller.css"/>
+    <title>test</title>
+</head>
+<body>
+<div class="sl-wrapper">
+    {{> header_bar}}
+    <div class="sl-admin">
+        <h2 class="head">后台管理系统</h2>
+        <table>
+            <tr>
+                <th width="70%">被举报商品信息</th>
+                <th width="30%">操作</th>
+            </tr>
+            <tbody>
+            {{#each reportList}}
+                <tr>
+                    <td>
+                        <a href="/detail/{{_id}}" target="_blank">
+                            <img width="60" height="60" src="{{main_img}}" alt=""/>
+                            <span>{{offer_title}}</span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="javascript:;" class="orange refuse" data-id="{{_id}}">回绝举报</a>
+                        <a href="javascript:;" class="orange drop-down" data-account="{{account}}">下架并加入黑名单</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="/javascripts/lib/require.js" data-main="/javascripts/pages/admin.js"></script>
+</body>
+</html>

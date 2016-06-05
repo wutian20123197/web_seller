@@ -19,6 +19,10 @@ var offerDetailSchema = new Schema({
     offer_degree: String,
     collect_num: Number,
     is_reported:{type: Boolean, default: false},
+    account: String,
+    state:{type: Number, default: 1},
+    view_num: {type: Number, default:0},
+    contacts_name: {type: String},
     img_list: [{
         img_url: String
     }]

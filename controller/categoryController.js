@@ -1,8 +1,9 @@
 /**
  * Created by wutian on 2016/5/5.
  */
-var userModel = require('../model/category_model').model;
+var categoryModel = require('../model/category_model').model;
 var offerModel = require('../model/offer_details_model').model;
+var userModel = require('../model/user_model').user;
 
 var exp = {
     errMessage: {code: -100, message: "系统错误"},
@@ -11,15 +12,22 @@ var exp = {
 
     getCategoryList: function (req, res) {
         var i = 0;
-        userModel.find({}, function (err, info) {
+        categoryModel.find({}, function (err, info) {
             //使用ES6 循环
             info.forEach(function(v, i){
-                offerModel.find({main_category: v.categoryId}, function(err, ans){
+                offerModel.find({main_category: v.categoryId, state: 1}, function(err, ans){
                     v.offerList = ans;
                     i++;
-                    if(i == 5){
-                        console.log(info[0].offerList);
-                        res.render('index', {categoryList: info});
+                    if(i == 4){
+                        //根据用户兴趣 推荐相应商品信息
+                        var account = req.session.account || "807572915";
+                        userModel.findOne({account: account}, function(err, user){
+                            var interest = user.interest_list;
+                            console.log(interest);
+                            offerModel.find({sub_category: { "$in":interest}}, function(err, intereRecomend){
+                                res.render('index', {categoryList: info, recommend: intereRecomend});
+                            }).sort({ view_num: -1}).limit(10);
+                        });
                     }
                 }).sort({ create_time: -1}).limit(8);
             });
@@ -31,7 +39,7 @@ var exp = {
      */
     getMainCategoryList: function (req, res) {
         //res.send(this.errMessage); //注意Node中this指向的是windows
-        userModel.find({}, function (err, info) {
+        categoryModel.find({}, function (err, info) {
             if (err) {
                 res.send(exp.errorMessages);
             } else {
@@ -45,8 +53,8 @@ var exp = {
      * 获取子类目信息
      */
     getSubCategoryList: function(req, res){
-        console.log(req.body);
-        userModel.findOne(req.body, function(err, info){
+        var categoryId = req.body.categoryId;
+        categoryModel.findOne({categoryId: categoryId}, function(err, info){
             if (err) {
                 res.send(exp.errorMessages);
             } else {

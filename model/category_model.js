@@ -8,6 +8,8 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     categoryId: Number,
     categoryName : String,
+    category_img: String,
+    index: Number,
     itemList: [{
         name: String,
         link: String

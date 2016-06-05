@@ -3,7 +3,7 @@
         <div class="left">
             <div class="ch-layout-floor-normal-left-style1">
                 <div class="ch-layout-floor-normal-left-style1-head">
-                    <h2> {{@index}}F {{categoryName}}</h2>
+                    <h2> {{index}}F {{categoryName}}</h2>
 
                     <!--类目底部列表-->
                     <ul class="ch-layout-floor-normal-left-style1-list-bottom clear">
@@ -16,14 +16,11 @@
                 </div>
 
                 <div class="ch-layout-floor-normal-left-style1-body">
-                    <img src="https://cbu01.alicdn.com/cms/upload/2015/101/315/2513101_1487718487.jpg?240x350" alt=""/>
+                    <img src="{{category_img}}" alt=""/>
                 </div>
 
                 <div class="ch-layout-floor-normal-left-style1-footer">
                     <div class="txt">
-                        <h3>{{mainTitle}}</h3>
-
-                        <p>{{subTitle}}</p>
                     </div>
                 </div>
 
@@ -38,11 +35,11 @@
                             <img src="{{main_img}}" alt=""/>
                         </div>
                         <div class="sl-offer-text">
-                            <h4>{{offer_title}}</h4>
+                            <p>{{offer_title}}</p>
 
                             <div class="mt10 clear">
                                 <div class="sl-offer-text-price">
-                                    <span class="f14">￥</span><span class="f24">{{offer_price}}</span>
+                                    <span class="f14 orange">￥{{offer_price}}</span>
                                 </div>
                                 <div class="sl-offer-text-area">
                                     <span><i class="iconfont">&#xe60c;</i>{{offer_area}}</span>

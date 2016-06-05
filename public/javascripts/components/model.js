@@ -70,6 +70,26 @@ define('model',[
             name: "remove_my_collect_offer",
             url: "/removeMyCollectOffer",
             type: "post"
+        },
+        {
+            name: "drop_down_offer",
+            url: "/dropDownOffer",
+            type: "post"
+        },
+        {
+            name: "add_message",
+            url: "/addMessage",
+            type: "post"
+        },
+        {
+            name: "refuse_report",
+            url: "/refuseReport",
+            type: "post"
+        },
+        {
+            name: "add_to_black_list",
+            url: "/addToBlackList",
+            type: "post"
         }
     ];
 
@@ -92,25 +112,31 @@ define('model',[
 
             //TODO 上线后需要替换为线上地址
             var prefixUrl = "http://localhost:3000";
-            url = prefixUrl + url;
-            $.ajax({
-                url: url,
-                type: type,
-                dataType: "json",
-                data: this.deleteNullParams(params),
-                success: function(data) {
-                    if(data.code === 200){
-                        fn(data);
-                    }else {
-                        Dialog.notify(data.message, 'error', 3);
-                        return false;
+            var isLogin = localStorage.getItem('account');
+            params['isLogin'] = isLogin;
+
+            if(isLogin || url== "/login" || url == "/register"){
+                $.ajax({
+                    url:prefixUrl + url,
+                    type: type,
+                    dataType: "json",
+                    data: this.deleteNullParams(params),
+                    success: function(data) {
+                            data.isLogin = isLogin;
+                            if(data.code === 200){
+                                fn(data);
+                            }else {
+                                Dialog.notify(data.message, 'error', 3);
+                                return false;
+                            }
+                    },
+                    error: function(err) {
+                        alert("系统错误");
                     }
-                },
-                error: function(err) {
-                    alert("系统错误");
-                    console.log(err);
-                }
-            });
+                });
+            }else{
+                Dialog.error("您还没有登录，请先登录！")
+            }
         },
 
         /**

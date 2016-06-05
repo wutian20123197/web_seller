@@ -64,6 +64,16 @@ define('../pages/login', [
             },
 
             /**
+             * 注销用户登录
+             */
+            loginOut: function(){
+                localStorage.removeItem('account');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('headImg');
+                location.reload();
+            },
+
+            /**
              * 初始化弹窗需要的注册事件
              */
             initDialogParams: function () {
@@ -114,9 +124,21 @@ define('../pages/login', [
                     if(data.code === 200){
                         Dialog.confirm().close();
                         localStorage.setItem('account',data.data.account) ;
+                        localStorage.setItem("userName", data.data.userName);
+                        localStorage.setItem("headImg",data.data.headImg);
                         window.location.reload();
                     }
                 });
+            },
+
+            /**
+             * 搜索商品
+             */
+            searchOffers: function(){
+                var keywords = $("#search-keywords").val();
+                if(keywords){
+                    window.location.href = "/search/2/" + keywords;
+                }
             },
 
             /**
@@ -135,21 +157,15 @@ define('../pages/login', [
         },
 
         showUserName: function(){
-            Model.getRequestByParams('get_user_is_login',{}, function(data){
-                //用户已登录
-                if(data.isLogin){
-                    var html = '<span>欢迎您，'+ data.account +'</span>';
-                    $("#userName").html(html);
-                    $showRegisterDialogBtn.hide();
-                }
-            })
-        },
-
-        /**
-         * 用户已登录 显示
-         */
-        isLogin: function(){
-
+            var account = localStorage.getItem("account");
+            if(account){
+                var html = '<span>欢迎您，'+ account +'</span>';
+                $("#userName").html(html);
+                !(account === "admin") || $("#admin").show();
+            }else{
+                $("#show-login-dialog").html("亲，请登录");
+                $("#show-register-dialog").html("免费注册");
+            }
         },
 
         bindEvents: function () {
@@ -157,6 +173,8 @@ define('../pages/login', [
             $showLoginDialogBtn.bind('click',{type: 0}, handlers.showDialog);
             $showRegisterDialogBtn.bind('click',{type: 1}, handlers.showDialog);
             this.showUserName();
+            $("#login-out").bind("click", handlers.loginOut);
+            $(".search").bind("click", handlers.searchOffers);
         }
     };
     return exports;

@@ -3,55 +3,55 @@
     <div class="head">
         <ul class="clear">
             <li class="head-item account">
-                <img src="//wwc.alicdn.com/avatar/getAvatar.do?userNick=leirenhua2009&width=30&height=30&type=sns"
-                     alt=""/>
-                <span class="ml5">句号小弟</span>
+                <img src="{{userInfo.head_img}}" width="30" height="30" alt=""/>
+                <span class="ml5">{{name}}</span>
+                &nbsp; &nbsp; &nbsp;
+                <span> 性别：{{userInfo.sex_type}}</span>
             </li>
             <li class="head-item">
                 <p>宝贝浏览次数</p>
 
-                <p>233</p>
+                <p>{{offerInfo.view_num}}</p>
             </li>
             <li class="head-item">
-                <p>最近编辑</p>
+                <p>发布日期</p>
 
-                <p>{{create_time}}</p>
+                <p>{{normal_time}}</p>
             </li>
             <li class="head-item-right">
-                <a href="javascript:;" id="report-offer" data-id="{{_id}}">举报改物品</a>
+                <a href="javascript:;" id="report-offer" data-id="{{offerInfo._id}}">举报改物品</a>
             </li>
         </ul>
     </div>
     <div class="sl-offer-detail-body clear">
         <div class="img-list">
             <div class="max-pic">
-                <img src="{{main_img}}" alt=""/>
+                <img src="{{offerInfo.main_img}}" alt=""/>
             </div>
             <div class="min-pic-list">
                 <ul class="clear">
-                    {{#each img_list}}
+                    {{#each offerInfo.img_list}}
                         <li class="item"><img src="{{img_url}}" alt=""/></li>
                     {{/each}}
                 </ul>
             </div>
-            <a class="collect-offer" href="javascript:;" data-id="{{_id}}"><i class="iconfont mr5">&#xe604;</i>收藏产品<span id="collect-num">{{collect_num}}</span></a>
+            <a class="collect-offer" href="javascript:;" data-id="{{offerInfo._id}}"><i class="iconfont mr5">&#xe604;</i>收藏产品<span id="collect-num">{{collect_num}}</span></a>
         </div>
         <div class="detail-text">
             <div class="detail-text-strong">
-                <h2>{{offer_title}}</h2>
-                <span class="label">价格： </span><span class="orange mr5">￥</span><span class="f24 orange">{{offer_price}}</span>
+                <h2>{{offerInfo.offer_title}}</h2>
+                <span class="label">价格： </span><span class="orange mr5">￥</span><span class="f24 orange">{{offerInfo.offer_price}}</span>
             </div>
-            <p class="item"><span class="label">新旧程度： </span><span class="orange">{{offer_degree}}</span></p>
+            <p class="item"><span class="label">新旧程度： </span><span class="orange">{{offerInfo.offer_degree}}</span></p>
 
-            <p class="item"><span class="label">交易地点： </span><span>{{offer_area}} {{offer_detail_area}}</span></p>
+            <p class="item"><span class="label">交易地点： </span><span>{{offerInfo.offer_area}} {{offerInfo.offer_detail_area}}</span></p>
 
-            <p class="item"><span class="label">来自用户： </span><span></span></p>
+            <p class="item"><span class="label">来自用户： </span>{{name}}<span></span></p>
 
-            <p class="item"><span class="label">联系人： </span><span></span></p>
+            <p class="item"><span class="label">联系人： </span><span>{{offerInfo.contacts_name}}</span></p>
 
             <p class="item"><span class="label">联系电话： </span><span>18084887501</span></p>
 
-            <p class="item"><span class="label">QQ号： </span><span>1887501</span></p>
         </div>
     </div>
 
@@ -62,11 +62,11 @@
             <div class="tab" id="detail-tab-wrapper">
                 <ul class="tab-list clear">
                     <li class="tab-item tab-current">宝贝介绍</li>
-                    <li class="tab-item">留言</li>
+                    <li class="tab-item">留言{{messageLength}}</li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-content-item tab-content-current">
-                       {{detail_text}}
+                       {{offerInfo.detail_text}}
                     </div>
                     <div class="tab-content-item">
                         <!--留言模块-->
@@ -82,41 +82,45 @@
                                     </div>
                                 </div>
                                 <div class="message">
-                                    <a href="javascript:;" class="btn btn-orange">发表</a>
+                                    <a href="javascript:;" class="btn btn-orange publish-message" data-id="{{userInfo.account}}" data-name="{{name}}"
+                                            data-offerid="{{offerInfo._id}}">发表</a>
                                 </div>
                             </div>
                         </div>
                         <ul class="sl-detail-records-list">
+                            {{#each messageList}}
                             <li>
                                <div class="item-message clear">
                                    <div class="head-logo">
-                                       <img src="https://wwc.alicdn.com/avatar/getAvatar.do?userId=678364079&width=30&height=30&type=sns"
-                                            alt="" width="30" height="30"/>
+                                       <img src="{{head_img}}" width="30" height="30"/>
+                                       <span class="user-name">{{from_name}}</span>
                                    </div>
-                                   <div class="content">
-                                       稀土元素玻璃柯克镜头，成像极锐，画角大气，对焦明亮有放大辅助，可惜机身用料突出轻便全是塑料。一朵鲜花插在牛粪上了?
-                                       稀土元素玻璃柯克镜头，成像极锐，画角大气，对焦明亮有放大辅助，可惜机身用料突出轻便全是塑料。一朵鲜花插在牛粪上了?
-
-                                   </div>
+                                   <div class="content">{{message_content}}</div>
                                    <div class="send-btn">
-                                       <a href="javascript:;">回复</a>
+                                       <a href="javascript:;" class="reply-message">回复</a>
                                    </div>
                                </div>
-                            </li>
-                            <li>
-                                <div class="item-message clear">
-                                    <div class="head-logo">
-                                        <img src="https://wwc.alicdn.com/avatar/getAvatar.do?userId=678364079&width=30&height=30&type=sns"
-                                             alt="" width="30" height="30"/>
-                                    </div>
-                                    <div class="content">
-                                        稀土元素玻璃柯克镜头，成像极锐，画角大气，对焦明亮有放大辅助，可惜机身用料突出轻便全是塑料。一朵鲜花插在牛粪上了?
-                                    </div>
-                                    <div class="send-btn">
-                                        <a href="javascript:;">回复</a>
+
+                                <div class="sl-detail-record-words clear hide-item">
+                                    <div class="sl-detail-do-records clear">
+                                        <div class="sl-detail-do-records-wrapper">
+                                            <div class="sl-detail-user">
+                                                <img src="//wwc.alicdn.com/avatar/getAvatar.do?userId=0&width=60&height=60&type=sns"
+                                                     alt=""/>
+                                            </div>
+                                            <div class="sl-detail-add">
+                                                <textarea></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="message">
+                                            <a href="javascript:;" class="btn btn-orange reply-publish-message" data-id="{{to_id}}" data-name="{{to_name}}"
+                                               data-offerid="{{offer_id}}">发表</a>
+                                        </div>
                                     </div>
                                 </div>
+
                             </li>
+                            {{/each}}
                         </ul>
                         <!--/留言模块-->
                     </div>
@@ -127,27 +131,15 @@
         <!--猜你喜欢-->
         <div class="right">
             <h4>猜你喜欢</h4>
+            {{#each likeList}}
 
             <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
-                     alt=""/>
-
-                <p class="price">￥22</p>
+                <a href="/detail/{{_id}}">
+                     <img src="{{main_img}}" alt=""/>
+                    <p class="price orange">￥{{offer_price}}</p>
+                </a>
             </div>
-            <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
-                     alt=""/>
-
-                <p class="price">￥22</p>
-            </div>
-            <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
-                     alt=""/>
-            </div>
-            <div class="product-img">
-                <img src="https://cbu01.alicdn.com/img/ibank/2014/148/504/1814405841_540208574.120x120xz.jpg_.webp"
-                     alt=""/>
-            </div>
+            {{/each}}
         </div>
         <!--/猜你喜欢-->
     </div>
