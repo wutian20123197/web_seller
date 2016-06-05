@@ -15,19 +15,26 @@ var exp = {
         categoryModel.find({}, function (err, info) {
             //使用ES6 循环
             info.forEach(function(v, i){
-                offerModel.find({main_category: v.categoryId, state: 1}, function(err, ans){
+                offerModel.find({main_category: v.categoryId,state: 1}, function(err, ans){
                     v.offerList = ans;
                     i++;
                     if(i == 4){
                         //根据用户兴趣 推荐相应商品信息
-                        var account = req.session.account || "807572915";
-                        userModel.findOne({account: account}, function(err, user){
-                            var interest = user.interest_list;
-                            console.log(interest);
-                            offerModel.find({sub_category: { "$in":interest}}, function(err, intereRecomend){
-                                res.render('index', {categoryList: info, recommend: intereRecomend});
-                            }).sort({ view_num: -1}).limit(10);
-                        });
+                        var account = req.session.account;
+                        //用户登录
+                        if(account){
+                            userModel.findOne({account: account}, function(err, user){
+                                var interest = user.interest_list;
+                                offerModel.find({sub_category: { $in:interest}, state:1}, function(err, intereRecomend){
+                                    res.render('index', {categoryList: info, recommend: intereRecomend});
+                                }).sort({ view_num: -1}).limit(10);
+                            });
+                        }else{
+                            offerModel.find({},function(err, user){
+                                res.render('index', {categoryList: info, recommend: user});
+                            }).sort({view_num: -1}).limit(10);
+                        }
+
                     }
                 }).sort({ create_time: -1}).limit(8);
             });

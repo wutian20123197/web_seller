@@ -17,7 +17,7 @@
         <aside id="picSet" class="detail-info">
             <figure class="pic-group">
                 <div class="logo-wrapper">
-                    <img class="pre-view-offer-img" width="100" height="100"  src=" {{userInfo.head_img}}"/>
+                    <img class="pre-view-offer-img" width="100" height="100" src=" {{userInfo.head_img}}"/>
                 </div>
                 <form id="upload-head-form">
                     <div class="info-item">
@@ -28,7 +28,8 @@
                         <button id="upload-logo-btn" type="button">上传头像</button>
                     </div>
                     <div class="info-item">
-                        <span>昵称&nbsp;&nbsp;：</span> <input type="text" value="{{userInfo.nick_name}}" id="nick-name" class="sl-input"/>
+                        <span>昵称&nbsp;&nbsp;：</span> <input type="text" value="{{userInfo.nick_name}}" id="nick-name"
+                                                            class="sl-input"/>
                     </div>
                     <div class="info-item">
                         <span>性别&nbsp;&nbsp;：</span>
@@ -49,8 +50,8 @@
                         箱包：<input type="checkbox" value="箱包"/>&nbsp;&nbsp;
                         鞋帽：<input type="checkbox" value="鞋帽"/>&nbsp;&nbsp;
                         摩托车：<input type="checkbox" value="摩托车"/>&nbsp;&nbsp;
-                       电动车：<input type="checkbox" value="电动车"/>&nbsp;&nbsp;
-                       自行车：<input type="checkbox" value="自行车"/>&nbsp;&nbsp;
+                        电动车：<input type="checkbox" value="电动车"/>&nbsp;&nbsp;
+                        自行车：<input type="checkbox" value="自行车"/>&nbsp;&nbsp;
                         转租：<input type="checkbox" value="转租"/>&nbsp;&nbsp;
                         求租：<input type="checkbox" value="求租"/>&nbsp;&nbsp;
                         家教：<input type="checkbox" value="家教"/>&nbsp;&nbsp;
@@ -58,7 +59,7 @@
                         物品交换：<input type="checkbox" value="物品交换"/>&nbsp;&nbsp;
                     </div>
                 </form>
-                <button  class="btn info-save" id="save-user-info">保存</button>
+                <button class="btn info-save" id="save-user-info">保存</button>
             </figure>
 
         </aside>
@@ -72,7 +73,8 @@
                         当前密码：
                     </div>
                     <div class="input-right">
-                        <input id="current-password" name="password"  data-rule="密码:required;password" type="password" placeholder="当前密码">
+                        <input id="current-password" name="password" data-rule="密码:required;password" type="password"
+                               placeholder="当前密码">
                     </div>
                 </div>
 
@@ -81,7 +83,8 @@
                         新密码：
                     </div>
                     <div class="input-right">
-                        <input id="new-password" name="new-password" data-rule="密码:required;password" type="password" placeholder="新密码">
+                        <input id="new-password" name="new-password" data-rule="密码:required;password" type="password"
+                               placeholder="新密码">
                     </div>
                 </div>
 
@@ -90,7 +93,8 @@
                         确认密码：
                     </div>
                     <div class="input-right">
-                        <input id="confirm-new-password" name="confirm-password" data-rule="密码:required;password" type="password" placeholder="确认密码">
+                        <input id="confirm-new-password" name="confirm-password" data-rule="密码:required;password"
+                               type="password" placeholder="确认密码">
                     </div>
                 </div>
             </form>
@@ -107,83 +111,54 @@
 
         <!--个人消息 start-->
         <aside id="myMessage" class="detail-info show-none">
-            <div class="message-group clearfix">
-                <div class="message-left">
-
+            {{#each messages}}
+                <div class="publish-group clearfix">
+                    <div class="publish-left">
+                        <img src="{{head_img}}" width="50" height="50" alt=""/>
+                        <span>{{from_name}}</span>
+                        <span>{{message_content}}</span>
+                    </div>
+                    <div style="margin-top: 23px">
+                        <a href="/detail/{{offer_id}}" class="orange">查看消息详情</a>&nbsp;&nbsp;
+                        <a href="javascript:;" class="orange ignore-message" data-id="{{_id}}">忽略</a>
+                    </div>
                 </div>
-                <div class="message-right">
-                    <a href="#">二手物品链接</a>
-
-                    <p>消息内容</p>
-                    <textarea rows="3" placeholder="回复消息"></textarea>
-                    <button class="btn btn-block">回复</button>
-                </div>
-            </div>
-
-            <div class="message-group clearfix">
-                <div class="message-left">
-
-                </div>
-                <div class="message-right">
-                    <a href="#">二手物品链接</a>
-
-                    <p>消息内容</p>
-                    <textarea rows="3" placeholder="回复消息"></textarea>
-                    <button class="btn btn-block">回复</button>
-                </div>
-            </div>
-
-            <div class="message-group clearfix">
-                <div class="message-left">
-
-                </div>
-                <div class="message-right">
-                    <a href="#">二手物品链接</a>
-
-                    <p>消息内容</p>
-                    <textarea rows="3" placeholder="回复消息"></textarea>
-                    <button class="btn btn-block">回复</button>
-                </div>
-            </div>
-
+            {{/each}}
         </aside>
         <!--个人消息 end-->
         <!--我的发布 start-->
         <aside id="myPublish" class="detail-info show-none">
             {{#each myOffers}}
-            <div class="publish-group clearfix">
-                <div class="publish-left">
-                    <a href="/detail/{{_id}}">
-                        <img src="{{main_img}}" width="100" height="100" alt=""/>
-                        <span>{{offer_title}}</span>
-                    </a>
-                    &nbsp; &nbsp; &nbsp;
-                    <span>{{offer_price}}元</span>
+                <div class="publish-group clearfix">
+                    <div class="publish-left">
+                        <a href="/detail/{{_id}}">
+                            <img src="{{main_img}}" width="100" height="100" alt=""/>
+                            <span>{{offer_title}}</span>
+                        </a>
+                        &nbsp; &nbsp; &nbsp;
+                        <span>{{offer_price}}元</span>
+                    </div>
+                    <div class="publish-center">
+                        <button class="btn down-offer" data-id="{{_id}}">下架</button>
+                    </div>
                 </div>
-                <div class="publish-center">
-                    <button class="btn down-offer"  data-id="{{_id}}">下架</button>
-                </div>
-                <!--<div class="publish-right">-->
-                    <!--<button class="btn update-offer">修改</button>-->
-                <!--</div>-->
-            </div>
             {{/each}}
         </aside>
         <!--我的发布 end-->
         <!--我的收藏 start-->
         <aside id="myCollect" class="detail-info show-none">
             {{#each collectList}}
-           <div class="collect-list clear">
-               <div class="left">
-                   <a href="/detail/{{_id}}">
-                       <img src="{{main_img}}" alt="" width="100" height="100"/>
-                       <span>{{offer_title}}</span>
-                   </a>
-               </div>
-               <div class="right">
-                   <a href="javascript:;" class="btn btn-orange remove" data-id="{{_id}}">移除</a>
-               </div>
-           </div>
+                <div class="collect-list clear">
+                    <div class="left">
+                        <a href="/detail/{{_id}}">
+                            <img src="{{main_img}}" alt="" width="100" height="100"/>
+                            <span>{{offer_title}}</span>
+                        </a>
+                    </div>
+                    <div class="right">
+                        <a href="javascript:;" class="btn btn-orange remove" data-id="{{_id}}">移除</a>
+                    </div>
+                </div>
             {{/each}}
         </aside>
         <!--我的收藏 end-->

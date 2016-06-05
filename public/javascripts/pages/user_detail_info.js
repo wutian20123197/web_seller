@@ -34,6 +34,7 @@ require(['../lib/config'], function () {
                 $saveUserBtn.bind('click',this.saveUserInfo);
                 $(".remove").bind("click", this.removeMyCollectOffer);
                 $(".down-offer").bind("click", this.dropDownOffer);
+                $(".ignore-message").bind("click", this.ignoreMessage);
             },
 
             /**
@@ -47,6 +48,15 @@ require(['../lib/config'], function () {
                         Dialog.success(res.message);
                         $this.closest(".publish-group").remove();
                     }
+                });
+            },
+
+            ignoreMessage: function () {
+                var id = $(this).data('id');
+                var me = this;
+                Model.getRequestByParams('ignore_message', {id: id}, function(data){
+                    $(me).closest(".publish-group").remove();
+                    Dialog.success("留言消息忽略成功！");
                 });
             },
 
@@ -64,9 +74,13 @@ require(['../lib/config'], function () {
                     contentType: false,
                     processData: false,
                     success: function (res) {
-                        var img = '<img class="pre-view-offer-img" width="100" height="100" src="' + res.data + '"/>';
-                        $imgWrapper.html(img);
-                        Dialog.success("头像上传成功！");
+                        if(res.code === -100){
+                            Dialog.error(res.message);
+                        }else{
+                            var img = '<img class="pre-view-offer-img" width="100" height="100" src="' + res.data + '"/>';
+                            $imgWrapper.html(img);
+                            Dialog.success("头像上传成功！");
+                        }
                     },
                     error: function (returndata) {
                         alert("系统错误");
@@ -158,6 +172,9 @@ require(['../lib/config'], function () {
                     Model.getRequestByParams('update_user_password',params, function(data){
                         if(data.code === 200){
                             Dialog.success(data.message);
+                           $("#current-password").val("");
+                            $("#new-password").val("");
+                            $("#confirm-new-password").val("");
                         }else{
                             Dialog.error(data.message);
                         }

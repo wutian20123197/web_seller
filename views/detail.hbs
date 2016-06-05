@@ -35,7 +35,7 @@
                     {{/each}}
                 </ul>
             </div>
-            <a class="collect-offer" href="javascript:;" data-id="{{offerInfo._id}}"><i class="iconfont mr5">&#xe604;</i>收藏产品<span id="collect-num">{{collect_num}}</span></a>
+            <a class="collect-offer" href="javascript:;" data-id="{{offerInfo._id}}"><i class="iconfont mr5">&#xe604;</i>收藏产品<span id="collect-num">{{offerInfo.collect_num}}</span></a>
         </div>
         <div class="detail-text">
             <div class="detail-text-strong">
@@ -62,7 +62,7 @@
             <div class="tab" id="detail-tab-wrapper">
                 <ul class="tab-list clear">
                     <li class="tab-item tab-current">宝贝介绍</li>
-                    <li class="tab-item">留言{{messageLength}}</li>
+                    <li class="tab-item" >留言<span id="message-num">{{messageLength}}</span></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-content-item tab-content-current">

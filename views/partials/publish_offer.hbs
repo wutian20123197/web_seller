@@ -6,7 +6,7 @@
         <form id="publish-offer-form" action="" autocomplete="off" data-validator-option="{theme:'yellow_right_effect',stopOnError:true}">
             <fieldset>
                 <div class="sl-publish-item">
-                    <span class="sl-publish-item-label">所属分类</span>
+                    <span class="sl-publish-item-label">所属分类&nbsp;&nbsp;<span class="red">*</span></span>
                     <select id="main-category" class="sl-select "></select>
                     <select  id="sub-category" class="sl-select"></select>
                 </div>
@@ -18,17 +18,17 @@
                     </select>
                 </div>
                 <div class="sl-publish-item">
-                    <span class="sl-publish-item-label">信息标题</span>
+                    <span class="sl-publish-item-label">信息标题&nbsp;&nbsp;<span class="red">*</span></span>
                     <input id="offer-title" type="text" name="title" placeholder="信息标题" data-rule="信息标题:required;"  class="sl-input w270"/>
                 </div>
                 <div class="sl-publish-item">
-                    <span class="sl-publish-item-label" >价格</span>
+                    <span class="sl-publish-item-label" >价格&nbsp;&nbsp;<span class="red">*</span></span>
                     <input id="offer-price" type="text" name="price" data-rule="价格:required;integer;"/>
                 </div>
-                <div class="sl-publish-item">
-                    <span class="sl-publish-item-label">数量</span>
-                    <input id="offer-num" type="text" name="number" data-rule="数量:required;integer;"/>
-                </div>
+                <!--<div class="sl-publish-item">-->
+                    <!--<span class="sl-publish-item-label">数量</span>-->
+                    <!--<input id="offer-num" type="text" name="number" data-rule="数量:required;integer;"/>-->
+                <!--</div>-->
                 <div class="sl-publish-item">
                     <span class="sl-publish-item-label">地址</span>
                     <input id="offer-detail-area" type="text"/>
@@ -50,7 +50,7 @@
                     </select>
                 </div>
                 <div class="sl-publish-item">
-                    <span class="sl-publish-item-label">联系电话</span>
+                    <span class="sl-publish-item-label">联系电话&nbsp;&nbsp;<span class="red">*</span></span>
                     <input name="tel" id="tel-num" type="text" class="sl-input"  data-rule="联系电话:required; mobile"
                            data-rule-mobile="[/^1[3458]\d{9}$/, '请检查手机号格式']" placeholder="请输入手机号码"/>
                 </div>

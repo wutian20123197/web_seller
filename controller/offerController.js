@@ -109,7 +109,6 @@ var exp = {
      */
     dropDownOffer: function(req, res){
         var account =req.session.account;
-        account = "807572915";
         var offerId = mongoose.Types.ObjectId(req.body.id);
         var conditions = {
             account: account,
@@ -148,7 +147,7 @@ var exp = {
             if(!isCollected){
                 collectList.push(offerId);
                 console.log(collectList);
-                userModel.update({account:807572915 },{$set:{collect_list: collectList}},function(err, info){
+                userModel.update({account:account },{$set:{collect_list: collectList}},function(err, info){
                    //商品收藏数增加
                     offerModel.update({_id: offerId},{$inc:{collect_num: 1}},function(err, info){
                         exp.successMessage.message = "收藏成功";

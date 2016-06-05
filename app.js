@@ -25,7 +25,7 @@ var app = express();
 app.use(session({
         secret: '12345',
          name: 'testapp',   //这里的name值得是cookie的name，默认cookie的name是：connect.sid
-        cookie: {maxAge: 800000000 },  //设置maxAge是80000ms，即80s后session和相应的cookie失效过期
+        cookie: {maxAge:86400000 },  //session失效时间为1天
         resave: false,
        saveUninitialized: true
      }));
@@ -109,6 +109,9 @@ app.post("/refuseReport", OfferDetailController.refuseReport);
 
 //加入黑名单 并下架用户发布的 全部商品
 app.post("/addToBlackList", UserController.dropDownOfferAndAddToBlackList);
+
+//忽略消息
+app.post("/ignoreMessage", MessageController.ignoreMessage);
 
 app.get("/public/upload/:filename",function(req, res){
     var fileName = req.params.filename;

@@ -12,6 +12,12 @@ var exp = {
         form.uploadDir =  './public/tmp';  //文件上传 临时文件存放路径
         form.parse(req, function(error, fields, files){
             var file = files.img;
+            var size = file.size;
+            //图片大小不能超过2M
+            if(size > 2048*1024){
+                res.send({code: -100, message: "图片大小不能超过2M"});
+                return false;
+            }
             var fName = (new Date()).getTime();
             switch (file.type){
                 case "image/jpeg":

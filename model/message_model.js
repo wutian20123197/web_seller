@@ -10,7 +10,8 @@ var messageSchema = new Schema({
     to_name: String,
     message_content: String,
     head_img: String,
-    offer_id: String
+    offer_id: String,
+    state: {type: Number, default: 0}
 });
 
 exports.model = mongoose.model('user_messages', messageSchema);

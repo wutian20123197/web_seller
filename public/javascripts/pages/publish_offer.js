@@ -7,7 +7,7 @@ define('../pages/publish_offer', [
     'model',
     'dialog',
     'template'
-], function ($, Valid, Model, Dialog, Template  ) {
+], function ($, Valid, Model, Dialog, Template) {
     var config = {
         mainCategory: "#main-category",
         publishBtn: ".btn-publish",
@@ -62,7 +62,8 @@ define('../pages/publish_offer', [
                 var data = {};
                 var html = Template('publish_offer', data);
                 Dialog.defaults.transition = "zoom";
-                Dialog.confirm("", function () {
+                Dialog.confirm("", function (closeEvent) {
+                        closeEvent.cancel = true;
                         exports.publishOffer();
                     },
                     function () {
@@ -89,8 +90,12 @@ define('../pages/publish_offer', [
                 contentType: false,
                 processData: false,
                 success: function (res) {
-                    var img = '<img class="pre-view-offer-img" src="' + res.data + '"/>';
-                    $imgWrapper.append(img);
+                    if (res.code === -100) {
+                        Dialog.error(res.message);
+                    } else {
+                        var img = '<img class="pre-view-offer-img" src="' + res.data + '"/>';
+                        $imgWrapper.append(img);
+                    }
                 },
                 error: function (returndata) {
                     alert("系统错误");
@@ -151,12 +156,32 @@ define('../pages/publish_offer', [
                 params.tel_num = $offerTelNum.val();
                 params.contacts_name = $("#user_real_name").val();
 
+                if (!params.main_category) {
+                    Dialog.error("商品主类目不能为空");
+                    return false;
+                }
+
+                if (!params.sub_category) {
+                    Dialog.error("商品次级类目不能为空");
+                    return false;
+                }
+
+                if (!params.img_list.length) {
+                    Dialog.error("请至少上传一张商品图片，方便用户查阅");
+                    return false;
+                }
+
+                if (params.img_list.length > 4) {
+                    Dialog.error("商品图片数量不能超过四张，请重新发布！");
+                    return false;
+                }
+
                 Model.getRequestByParams("add_offer", params, function (res) {
                     if (res.code === 200) {
                         Dialog.success("发布成功！");
-                        setTimeout(function(){
+                        setTimeout(function () {
                             window.location.reload();
-                        },800);
+                        }, 800);
 
                     }
                 });

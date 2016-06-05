@@ -80,6 +80,7 @@ require(['../lib/config'],function(){
                 var $this = $(this);
                 var $current = $this.closest('li').find('.hide-item');
                 $current.show(300);
+                exports.resetMessageNum();
             },
 
             /**
@@ -107,8 +108,15 @@ require(['../lib/config'],function(){
                             Dialog.success("留言发布成功！");
                             $this.closest(".sl-detail-do-records").find("textarea").val("");
                             exports.setMessageToList(data.data);
+                            exports.resetMessageNum();
                         }
                     });
+            },
+
+            resetMessageNum: function(){
+                var num = $("#message-num").text();
+                num++;
+                $("#message-num").text(num);
             },
 
             /**

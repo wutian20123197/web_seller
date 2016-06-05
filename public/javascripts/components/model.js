@@ -90,6 +90,11 @@ define('model',[
             name: "add_to_black_list",
             url: "/addToBlackList",
             type: "post"
+        },
+        {
+            name: "ignore_message",
+            url: "/ignoreMessage",
+            type: "post"
         }
     ];
 
